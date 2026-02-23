@@ -12,13 +12,27 @@ export default function PlayerSummaryCard({ player }) {
     axios
       .get(`${API_BASE}/player/${player.id}/summary`)
       .then(res => setSummary(res.data))
-      .catch(err => console.error(err))
-  }, [player.id, API_BASE])
+      .catch(err => {
+          if (err.response?.status === 404) {
+	  setSummary("not_cached")
+        } else {
+	  console.error(err)
+        }
+      })
+  }, [player.id])
 
-  if (!summary) {
+  if (summary === null ) {
     return (
       <div className="bg-gray-700 p-4 rounded mb-3">
         Loading {player.name}...
+      </div>
+    )
+  }
+
+  if (summary === "not_cached") {
+    return (
+      <div className="bg-gray-700 p-4 rounded mb-3">
+        {player.name} not cached yet.
       </div>
     )
   }

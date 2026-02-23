@@ -49,6 +49,9 @@ def build_player_summary(player_id: int):
     ts_pct = pts / (2 * (fga + 0.44 * fta)) if (fga + 0.44 * fta) > 0 else 0
     efg_pct = (fgm + 0.5 * fg3m) / fga if fga > 0 else 0
 
+    if not cached or "data" not in cached:
+        raise HTTPException(status_code=404, detail="Player not cached yet")
+
     # Last game
     gamelog = playergamelog.PlayerGameLog(
         player_id=player_id,

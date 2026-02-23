@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import PlayerCard from "../components/PlayerCard"
+import ReturnHome from "../components/ReturnHome"
 
 export default function PlayerSearch() {
   const [name, setName] = useState("")
@@ -36,16 +37,23 @@ export default function PlayerSearch() {
   }
 
   return (
-    <div className="p-8 bg-gray-900 min-h-screen text-white">
-      <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-        className="bg-gray-800 p-2 rounded"
-      >
-        <option value="players">Players</option>
-        <option value="teams">Teams</option>
-        <option value="stats">Stats</option>
-      </select>
+    <div className="relative p-8 bg-gray-900 min-h-screen text-white">
+     
+      <div className="absolute top-6 right-8">
+        <ReturnHome />
+      </div>
+
+      <div className="flex justify-between items-center">
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="bg-gray-800 p-2 rounded mb-12"
+        >
+          <option value="players">Players</option>
+          <option value="teams">Teams</option>
+          <option value="stats">Stats</option>
+        </select>
+      </div>
       <h1 className="text-3xl font-bold mb-6">Search {category}</h1>
 
       <div className="flex gap-4">

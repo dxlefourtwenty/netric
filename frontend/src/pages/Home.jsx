@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import PlayerSummaryCard from "../components/PlayerSummaryCard"
 
 export default function Home() {
   const navigate = useNavigate()
+  const [activeTab, setActiveTab] = useState("players")
+
   const [favorites, setFavorites] = useState({
     players: [],
     teams: [],
@@ -56,50 +59,104 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-6 mt-8">
+      {/* Tabs */}
+      <div className="mt-8">
 
-        {/* Favorite Players */}
-        <div className="bg-gray-800 p-6 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Favorite Players</h2>
-          {favorites.players.length === 0 ? (
-            <p className="text-gray-400">No favorites yet.</p>
-          ) : (
-            favorites.players.map(p => (
-              <div key={p.id} className="mb-2">
-                {p.name}
-              </div>
-            ))
-          )}
+        {/* Tab Buttons */}
+        <div className="flex gap-4 border-b border-gray-700 mb-6">
+          <button
+            onClick={() => setActiveTab("players")}
+            className={`pb-2 px-2 ${
+              activeTab === "players"
+                ? "border-b-2 border-blue-500 text-blue-400 font-semibold"
+                : "text-gray-400 hover:text-white"
+            }`}
+          >
+            Favorite Players
+          </button>
+
+          <button
+            onClick={() => setActiveTab("teams")}
+            className={`pb-2 px-2 ${
+              activeTab === "teams"
+                ? "border-b-2 border-blue-500 text-blue-400 font-semibold"
+                : "text-gray-400 hover:text-white"
+            }`}
+          >
+            Favorite Teams
+          </button>
+
+          <button
+            onClick={() => setActiveTab("stats")}
+            className={`pb-2 px-2 ${
+              activeTab === "stats"
+                ? "border-b-2 border-blue-500 text-blue-400 font-semibold"
+                : "text-gray-400 hover:text-white"
+            }`}
+          >
+            Favorite Stats
+          </button>
         </div>
 
-        {/* Favorite Teams */}
+        {/* Tab Content */}
         <div className="bg-gray-800 p-6 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Favorite Teams</h2>
-          {favorites.teams.length === 0 ? (
-            <p className="text-gray-400">No favorites yet.</p>
-          ) : (
-            favorites.teams.map(t => (
-              <div key={t.id} className="mb-2">
-                {t.name}
-              </div>
-            ))
-          )}
-        </div>
 
-        {/* Favorite Stat Categories */}
-        <div className="bg-gray-800 p-6 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Favorite Stats</h2>
-          {favorites.stats.length === 0 ? (
-            <p className="text-gray-400">No favorites yet.</p>
-          ) : (
-            favorites.stats.map((s, index) => (
-              <div key={index} className="mb-2">
-                {s.type}
-              </div>
-            ))
+          {activeTab === "players" && (
+            <>
+              <h2 className="text-xl font-semibold mb-4">Favorite Players</h2>
+              {favorites.players.length === 0 ? (
+                <p className="text-gray-400">No favorites yet.</p>
+              ) : (
+                <div className="grid grid-cols-1 min-[900px]:grid-cols-1 min-[1300px]:grid-cols-2 min-[1800px]:grid-cols-3 gap-6">
+                  {favorites.players.map(p => (
+                    <PlayerSummaryCard key={p.id} player={p} />
+                  ))}
+                </div>
+              )}
+            </>
           )}
-        </div>
 
+          {activeTab === "teams" && (
+            <>
+              <h2 className="text-xl font-semibold mb-4">Favorite Teams</h2>
+              {favorites.teams.length === 0 ? (
+                <p className="text-gray-400">No favorites yet.</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {favorites.teams.map(t => (
+                    <div
+                      key={t.id}
+                      className="bg-gray-700 p-4 rounded-lg"
+                    >
+                      {t.name}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+
+          {activeTab === "stats" && (
+            <>
+              <h2 className="text-xl font-semibold mb-4">Favorite Stats</h2>
+              {favorites.stats.length === 0 ? (
+                <p className="text-gray-400">No favorites yet.</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {favorites.stats.map((s, index) => (
+                    <div
+                      key={index}
+                      className="bg-gray-700 p-4 rounded-lg"
+                    >
+                      {s.type}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+
+        </div>
       </div>
     </div>
   )

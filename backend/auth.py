@@ -104,3 +104,30 @@ def add_favorite_player(data, authorization: str):
     )
 
     return {"message": "Player favorited"}
+
+def remove_favorite_player(player_id: int, authorization: str):
+    if not authorization or not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing token")
+
+    token = authorization.replace("Bearer ", "", 1)
+
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    email = payload["sub"]
+
+    result = users_collection.update_one(
+        {"email": email},
+        {
+            "$pull": {
+                "favorites.players": { "id": player_id }
+            }
+        }
+    )
+
+    if result.modified_count == 0:
+        raise HTTPException(status_code=404, detail="Player not found in favorites")
+
+    return {"message": "Player removed"}

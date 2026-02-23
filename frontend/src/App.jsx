@@ -3,6 +3,7 @@ import Home from "./pages/Home"
 import PlayerSearch from "./pages/PlayerSearch"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+import PlayerInfo from "./pages/PlayerInfo"
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Route path="/search" element={<PlayerSearch />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/player/:id" element={<PlayerInfo />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

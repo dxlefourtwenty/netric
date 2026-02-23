@@ -7,6 +7,8 @@ export default function Home() {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState("players")
 
+  const API_BASE = import.meta.env.VITE_API_BASE
+
   const [favorites, setFavorites] = useState({
     players: [],
     teams: [],
@@ -22,7 +24,7 @@ export default function Home() {
     }
 
     axios
-    .get("http://127.0.0.1:8000/favorites", {
+    .get(`${API_BASE}/favorites`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((res) => setFavorites(res.data))

@@ -10,6 +10,8 @@ export default function PlayerSearch() {
   const [error, setError] = useState(null)
   const [category, setCategory] = useState("players")
 
+  const API_BASE = import.meta.env.VITE_API_BASE
+
   const searchPlayer = async () => {
     if (!name.trim()) return
 
@@ -21,14 +23,10 @@ export default function PlayerSearch() {
       const encodedName = encodeURIComponent(name.trim())
 
       const res = await axios.get(
-        `http://127.0.0.1:8000/search/${category}/${encodedName}`
+        `${API_BASE}/search/${category}/${encodedName}`
       )
 
-      setStats({
-        stats: res.data.stats,
-        playerId: res.data.player_id,
-        playerName: name
-      })
+      setStats(res.data)
     } catch (err) {
       setError("Player not found or server error.")
     } finally {

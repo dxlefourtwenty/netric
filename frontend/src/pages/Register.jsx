@@ -9,12 +9,14 @@ export default function Register() {
   const [password, setPassword] = useState("")
   const [error, setError] = useState(null)
 
+  const API_BASE = import.meta.env.VITE_API_BASE
+
   const handleRegister = async (e) => {
     e.preventDefault()
 
     try {
       await axios.post(
-        "http://127.0.0.1:8000/register",
+        `${API_BASE}/register`,
         { email, password }
       )
 

@@ -6,11 +6,11 @@ export default function PlayerSummaryCard({ player }) {
   const [summary, setSummary] = useState(null)
   const navigate = useNavigate()
 
-  
+  const API_BASE = import.meta.env.VITE_API_BASE  
 
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/player/${player.id}/summary`)
+      .get(`${API_BASE}/player/${player.id}/summary`)
       .then(res => setSummary(res.data))
       .catch(err => console.error(err))
   }, [player.id])

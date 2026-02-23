@@ -1,17 +1,22 @@
 import axios from "axios"
 
-export default function PlayerCard({ stats, playerId, playerName }) {
+export default function PlayerCard({
+  player_id,
+  name,
+  season,
+  season_stats,
+  last_game,
+  headshot_url
+}) {
 
   const token = localStorage.getItem("token")
-
-  const currentSeason = stats[stats.length - 1]
-  const totalPoints = stats.reduce((sum, s) => sum + s.PTS, 0)
+  const API_BASE = import.meta.env.VITE_API_BASE
 
   const handleFavorite = async () => {
     try {
       await axios.post(
-        "http://127.0.0.1:8000/favorite/players",
-        { id: playerId, name: playerName },
+        `${API_BASE}/favorite/players`,
+        { id: player_id, name },
         {
           headers: { Authorization: `Bearer ${token}` }
         }
@@ -23,17 +28,32 @@ export default function PlayerCard({ stats, playerId, playerName }) {
     }
   }
 
+  if (!season_stats) return null
+
   return (
     <div className="mt-8 bg-gray-800 p-6 rounded-lg shadow-lg">
-      <h2 className="text-xl font-semibold mb-4">Career Overview</h2>
+      <h2 className="text-xl font-semibold mb-4">{name}</h2>
 
-      <p>Total Career Points: {totalPoints}</p>
+      <img
+        src={headshot_url}
+        alt={name}
+        className="w-48 mb-4 rounded"
+      />
 
-      <h3 className="mt-4 font-semibold">Current Season</h3>
-      <p>Season: {currentSeason.SEASON_ID}</p>
-      <p>PTS: {currentSeason.PTS}</p>
-      <p>AST: {currentSeason.AST}</p>
-      <p>REB: {currentSeason.REB}</p>
+      <h3 className="font-semibold">Season: {season}</h3>
+      <p>PTS: {season_stats.pts}</p>
+      <p>AST: {season_stats.ast}</p>
+      <p>REB: {season_stats.reb}</p>
+      <p>FG%: {(season_stats.fg_pct * 100).toFixed(1)}%</p>
+
+      {last_game && (
+        <>
+          <h3 className="mt-4 font-semibold">Last Game</h3>
+          <p>{last_game.matchup}</p>
+          <p>{last_game.date}</p>
+          <p>PTS: {last_game.pts}</p>
+        </>
+      )}
 
       <button
         onClick={handleFavorite}

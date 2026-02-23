@@ -9,9 +9,11 @@ export default function PlayerInfo() {
   const [tab, setTab] = useState("season")
   const [data, setData] = useState(null)
 
+  const API_BASE = import.meta.env.VITE_API_BASE
+
   useEffect(() => {
     axios
-      .get(`http://127.0.0.1:8000/player/${id}/summary`)
+      .get(`${API_BASE}/player/${id}/summary`)
       .then(res => setData(res.data))
       .catch(err => console.error(err))
   }, [id])

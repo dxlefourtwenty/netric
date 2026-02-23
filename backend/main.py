@@ -1,15 +1,12 @@
 from fastapi import FastAPI
-from fastapi import HTTPException
+from fastapi import Header
 from fastapi.middleware.cors import CORSMiddleware
-from nba_api.stats.static import players
-from nba_api.stats.endpoints import playercareerstats
-from nba_api.stats.library.http import NBAStatsHTTP
-
-import time
+from models import AuthRequest
+from auth import register_user, login_user, get_user_favorites, add_favorite_player
+from nba import search_player_stats
 
 app = FastAPI()
 
-# Allow frontend to connect
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -18,35 +15,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-NBAStatsHTTP.headers.update({
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-    "Referer": "https://www.nba.com/",
-    "Origin": "https://www.nba.com"
-})
-
-@app.get("/search/{name}")
+@app.get("/search/players/{name}")
 def search_player(name: str):
-    try:
-        results = players.find_players_by_full_name(name)
-        if not results:
-            raise HTTPException(status_code=404, detail="Player not found")
+    return search_player_stats(name)
 
-        player_id = results[0]['id']
+@app.post("/register")
+def register(data: AuthRequest):
+    return register_user(data)
 
-        # small delay to avoid rate limit
-        time.sleep(1)
+@app.post("/login")
+def login(data: AuthRequest):
+    return login_user(data)
 
-        career = playercareerstats.PlayerCareerStats(
-            player_id=player_id,
-            timeout=60
-        )
+@app.get("/favorites")
+def favorites(authorization: str = Header(None)):
+    return get_user_favorites(authorization)
 
-        df = career.get_data_frames()[0]
-
-        return {
-            "player_id": player_id,
-            "stats": df.to_dict(orient="records")
-        }
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+@app.post("/favorite/players")
+def favorite_player(data: dict, authorization: str = Header(None)):
+    return add_favorite_player(data, authorization)

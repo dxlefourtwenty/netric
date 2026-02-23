@@ -7,6 +7,7 @@ export default function PlayerSearch() {
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [category, setCategory] = useState("players")
 
   const searchPlayer = async () => {
     if (!name.trim()) return
@@ -19,10 +20,14 @@ export default function PlayerSearch() {
       const encodedName = encodeURIComponent(name.trim())
 
       const res = await axios.get(
-        `http://127.0.0.1:8000/search/${encodedName}`
+        `http://127.0.0.1:8000/search/${category}/${encodedName}`
       )
 
-      setStats(res.data.stats)
+      setStats({
+        stats: res.data.stats,
+        playerId: res.data.player_id,
+        playerName: name
+      })
     } catch (err) {
       setError("Player not found or server error.")
     } finally {
@@ -32,13 +37,27 @@ export default function PlayerSearch() {
 
   return (
     <div className="p-8 bg-gray-900 min-h-screen text-white">
-      <h1 className="text-3xl font-bold mb-6">Search Player</h1>
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        className="bg-gray-800 p-2 rounded"
+      >
+        <option value="players">Players</option>
+        <option value="teams">Teams</option>
+        <option value="stats">Stats</option>
+      </select>
+      <h1 className="text-3xl font-bold mb-6">Search {category}</h1>
 
       <div className="flex gap-4">
         <input
           className="p-2 rounded bg-gray-800 border border-gray-700"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              searchPlayer();
+            }
+          }}
           placeholder="Enter player name"
         />
 
@@ -63,7 +82,7 @@ export default function PlayerSearch() {
 
       {error && <p className="mt-6 text-red-500">{error}</p>}
 
-      {stats && !loading && <PlayerCard stats={stats} />}
+      {stats && !loading && <PlayerCard {...stats} />}
     </div>
   )
 }

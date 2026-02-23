@@ -46,7 +46,7 @@ def login_user(data):
     token = jwt.encode(
         {
             "sub": data.email,
-            "exp": datetime.utcnow() + timedelta(hours=24)
+            "exp": datetime.now(UTC) + timedelta(hours=24)
         },
         SECRET_KEY,
         algorithm=ALGORITHM

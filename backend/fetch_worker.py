@@ -1,49 +1,40 @@
 from nba_api.stats.static import players
-from nba_api.stats.endpoints import playercareerstats, playergamelog
+from nba import build_player_summary
 from database import db
 from datetime import datetime
-import sys
 
 player_cache = db["player_cache"]
 
 def fetch_player(name):
     results = players.find_players_by_full_name(name)
     if not results:
-        print("Player not found")
+        print("Player not found:", name)
         return
 
     player_id = results[0]["id"]
 
-    career = playercareerstats.PlayerCareerStats(
-        player_id=player_id,
-        timeout=30
-    )
-    df = career.get_data_frames()[0]
-
-    gamelog = playergamelog.PlayerGameLog(
-        player_id=player_id,
-        timeout=30
-    )
-    games_df = gamelog.get_data_frames()[0]
-
-    result = {
-        "player_id": player_id,
-        "career_stats": df.to_dict(orient="records"),
-        "game_log": games_df.to_dict(orient="records"),
-        "last_updated": datetime.utcnow()
-    }
+    summary = build_player_summary(player_id)
 
     player_cache.update_one(
         {"player_id": player_id},
-        {"$set": result},
+        {
+            "$set": {
+                "player_id": player_id,
+                "data": summary,
+                "last_updated": datetime.utcnow()
+            }
+        },
         upsert=True
     )
 
     print("Stored:", name)
 
+def run_batch():
+    with open("players.txt") as f:
+        for line in f:
+            name = line.strip()
+            if name:
+                fetch_player(name)
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python fetch_worker.py 'LeBron James'")
-    else:
-        fetch_player(sys.argv[1])
+    run_batch()

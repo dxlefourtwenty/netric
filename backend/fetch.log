@@ -1,0 +1,569 @@
+✅ MongoDB connected
+Usage: python fetch_worker.py 'LeBron James'
+✅ MongoDB connected
+Usage: python fetch_worker.py 'LeBron James'
+✅ MongoDB connected
+Usage: python fetch_worker.py 'LeBron James'
+✅ MongoDB connected
+Usage: python fetch_worker.py 'LeBron James'
+✅ MongoDB connected
+Traceback (most recent call last):
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 46, in <module>
+    run_batch()
+    ^^^^^^^^^
+NameError: name 'run_batch' is not defined
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:33: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:41: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+✅ MongoDB connected
+Traceback (most recent call last):
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 28, in <module>
+    run_batch()
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 24, in run_batch
+    fetch_player(name)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 14, in fetch_player
+    get_player_summary(player_id)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/nba.py", line 54, in get_player_summary
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 404: Player not cached yet. Run fetch worker first.
+✅ MongoDB connected
+Traceback (most recent call last):
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 28, in <module>
+    run_batch()
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 24, in run_batch
+    fetch_player(name)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 14, in fetch_player
+    get_player_summary(player_id)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/nba.py", line 54, in get_player_summary
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 404: Player not cached yet. Run fetch worker first.
+✅ MongoDB connected
+Traceback (most recent call last):
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 28, in <module>
+    run_batch()
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 24, in run_batch
+    fetch_player(name)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 14, in fetch_player
+    get_player_summary(player_id)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/nba.py", line 54, in get_player_summary
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 404: Player not cached yet. Run fetch worker first.
+✅ MongoDB connected
+Traceback (most recent call last):
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 28, in <module>
+    run_batch()
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 24, in run_batch
+    fetch_player(name)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 14, in fetch_player
+    get_player_summary(player_id)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/nba.py", line 54, in get_player_summary
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 404: Player not cached yet. Run fetch worker first.
+✅ MongoDB connected
+Traceback (most recent call last):
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 28, in <module>
+    run_batch()
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 24, in run_batch
+    fetch_player(name)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py", line 14, in fetch_player
+    get_player_summary(player_id)
+  File "/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/nba.py", line 54, in get_player_summary
+    raise HTTPException(
+fastapi.exceptions.HTTPException: 404: Player not cached yet. Run fetch worker first.
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Stored: LeBron James
+Stored: Stephen Curry
+Stored: Victor Wembanyama

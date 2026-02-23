@@ -1,11 +1,22 @@
-from fastapi import FastAPI
-from fastapi import Header
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+
 from models import AuthRequest
-from auth import register_user, login_user, get_user_favorites, add_favorite_player, remove_favorite_player
-from nba import search_player_stats, get_player_summary
+from auth import (
+    register_user,
+    login_user,
+    get_user_favorites,
+    add_favorite_player,
+    remove_favorite_player
+)
+
+from nba import search_player_stats
+from database import db
 
 app = FastAPI()
+
+# Mongo collection
+player_cache = db["player_cache"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -15,9 +26,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# ---------------------------
+# SEARCH (still allowed)
+# ---------------------------
+
 @app.get("/search/players/{name}")
 def search_player(name: str):
     return search_player_stats(name)
+
+# ---------------------------
+# AUTH
+# ---------------------------
 
 @app.post("/register")
 def register(data: AuthRequest):
@@ -26,6 +45,10 @@ def register(data: AuthRequest):
 @app.post("/login")
 def login(data: AuthRequest):
     return login_user(data)
+
+# ---------------------------
+# FAVORITES
+# ---------------------------
 
 @app.get("/favorites")
 def favorites(authorization: str = Header(None)):
@@ -39,13 +62,23 @@ def favorite_player(data: dict, authorization: str = Header(None)):
 def delete_favorite_player(player_id: int, authorization: str = Header(None)):
     return remove_favorite_player(player_id, authorization)
 
+# ---------------------------
+# SUMMARY (CACHE ONLY)
+# ---------------------------
+
 @app.get("/player/{player_id}/summary")
 def player_summary(player_id: int):
-    return get_player_summary(player_id)
+    cached = player_cache.find_one({"player_id": player_id})
+    if not cached:
+        raise HTTPException(
+            status_code=404,
+            detail="Player not cached yet."
+        )
+    return cached["data"]
 
-@app.get("/player/{player_id}/full")
-def player_full(player_id: int):
-    return get_player_full(player_id)
+# ---------------------------
+# DEBUG
+# ---------------------------
 
 @app.delete("/debug/clear-player-cache/{player_id}")
 def clear_player_cache(player_id: int):

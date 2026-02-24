@@ -36,7 +36,7 @@ def seed_active_players():
         print(f"Queued: {name}")
 
         # Small delay to avoid spamming Mongo
-        time.sleep(5)
+        time.sleep(1)
 
     print("----- DONE -----")
     print(f"Total active players: {total}")

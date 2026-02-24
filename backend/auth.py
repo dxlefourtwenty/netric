@@ -1,5 +1,5 @@
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from fastapi import HTTPException, Header
 from jose import jwt
 from passlib.context import CryptContext
@@ -46,7 +46,7 @@ def login_user(data):
     token = jwt.encode(
         {
             "sub": data.email,
-            "exp": datetime.now(UTC) + timedelta(hours=24)
+            "exp": datetime.now(timezone.utc) + timedelta(hours=24)
         },
         SECRET_KEY,
         algorithm=ALGORITHM

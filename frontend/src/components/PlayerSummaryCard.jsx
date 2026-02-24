@@ -116,11 +116,11 @@ export default function PlayerSummaryCard({ player }) {
 
       <div className="flex flex-row justify-between mx-2 items-center">
         <div className="flex flex-col items-center gap-5">
-          <h2 className="font-semibold text-xl">{player.name}</h2>
+          <h2 className="font-semibold text-lg">{player.name}</h2>
 	  {summary.headshot_url && (
             <img src={summary.headshot_url} className="w-45 h-33"/>)}
         </div>
-        <div className="flex flex-col mt-2 text-lg items-center">
+        <div className="flex flex-col mt-2 text-md items-center">
           <p>{summary.season} Season Stats</p>
           <div className="flex flex-row gap-5">
             <p>PTS: {formatStat(summary.season_stats.pts)}</p>

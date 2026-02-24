@@ -1782,3 +1782,157 @@ Worker started.
 Worker started.
 ✅ MongoDB connected
 Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Worker started.
+Fetching player_id: 1630173
+Stored: 1630173
+Fetching player_id: 203500
+Stored: 203500
+Fetching player_id: 1628389
+Stored: 1628389
+Fetching player_id: 1630534
+Stored: 1630534
+Fetching player_id: 1630583
+Stored: 1630583
+Fetching player_id: 1641725
+Stored: 1641725
+Fetching player_id: 1629638
+Stored: 1629638
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+/home/daled/dev/coding-in-class/spring2026/4800CS/project-version-1/backend/fetch_worker.py:29: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "last_updated": datetime.utcnow()
+✅ MongoDB connected
+Worker started.
+Fetching player_id: 1628960
+Stored: 1628960
+Fetching player_id: 1628386
+Stored: 1628386
+Fetching player_id: 1630631
+Stored: 1630631
+Fetching player_id: 203937
+Stored: 203937
+Fetching player_id: 1630828
+Fetch failed: 'resultSet'
+Fetching player_id: 203507
+Stored: 203507
+Fetching player_id: 203648
+Stored: 203648
+Fetching player_id: 1630175
+Stored: 1630175
+Fetching player_id: 1628384
+Stored: 1628384
+Fetching player_id: 1630166
+Fetch failed: HTTPSConnectionPool(host='stats.nba.com', port=443): Read timed out. (read timeout=30)
+Fetching player_id: 1629028
+Stored: 1629028
+Fetching player_id: 1628963
+Stored: 1628963
+Fetching player_id: 1642846
+Stored: 1642846
+Fetching player_id: 1630163
+Stored: 1630163
+Fetching player_id: 1628366
+Stored: 1628366
+Fetching player_id: 1631094
+Stored: 1631094
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.
+✅ MongoDB connected
+Worker started.

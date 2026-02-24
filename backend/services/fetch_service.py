@@ -44,3 +44,24 @@ def fetch_player_by_name(name: str):
     )
 
     return summary_data
+
+def fetch_player_data(player_id: int):
+    player_info = players.find_player_by_id(player_id)
+    if not player_info:
+        raise Exception("Player not found")
+
+    name = player_info["full_name"]
+
+    career = playercareerstats.PlayerCareerStats(player_id=player_id)
+    career_df = career.get_data_frames()[0]
+
+    gamelog = playergamelog.PlayerGameLog(player_id=player_id)
+    game_df = gamelog.get_data_frames()[0]
+
+    return {
+        "player_id": player_id,
+        "name": name,
+        "career_stats": career_df.to_dict("records"),
+        "game_log": game_df.to_dict("records"),
+    }
+

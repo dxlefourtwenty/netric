@@ -2,7 +2,6 @@ import pandas as pd
 from datetime import datetime
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playercareerstats, playergamelog
-from services.fetch_service import fetch_player_by_name
 from fastapi import HTTPException
 
 from database import db

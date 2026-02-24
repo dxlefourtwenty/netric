@@ -1,40 +1,45 @@
-from nba_api.stats.static import players
-from nba import build_player_summary
-from database import db
 from datetime import datetime
+from database import db
+from services.fetch_service import fetch_player_data
 
 player_cache = db["player_cache"]
+fetch_queue = db["fetch_queue"]
 
-def fetch_player(name):
-    results = players.find_players_by_full_name(name)
-    if not results:
-        print("Player not found:", name)
-        return
 
-    player_id = results[0]["id"]
+def run_queue():
+    print("Worker started.")
 
-    summary = build_player_summary(player_id)
+    while True:
+        job = fetch_queue.find_one()
+        if not job:
+            break
 
-    player_cache.update_one(
-        {"player_id": player_id},
-        {
-            "$set": {
-                "player_id": player_id,
-                "summary": summary,
-                "last_updated": datetime.utcnow()
-            }
-        },
-        upsert=True
-    )
+        player_id = job["player_id"]
+        print("Fetching player_id:", player_id)
 
-    print("Stored:", name)
+        try:
+            data = fetch_player_data(player_id)
 
-def run_batch():
-    with open("players.txt") as f:
-        for line in f:
-            name = line.strip()
-            if name:
-                fetch_player(name)
+            player_cache.update_one(
+                {"player_id": player_id},
+                {
+                    "$set": {
+                        "player_id": player_id,
+                        "data": data,
+                        "last_updated": datetime.utcnow()
+                    }
+                },
+                upsert=True
+            )
+
+            print("Stored:", player_id)
+
+        except Exception as e:
+            print("Fetch failed:", e)
+
+        fetch_queue.delete_one({"_id": job["_id"]})
+
 
 if __name__ == "__main__":
-    run_batch()
+    run_queue()
+

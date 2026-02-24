@@ -58,6 +58,56 @@ def build_player_summary(player_id: int):
     latest = career_stats.iloc[0]
 
     # -------------------------
+    # Last Game (most recent)
+    # -------------------------
+    last_game = None
+
+    if not game_log.empty:
+        game_log["GAME_DATE"] = pd.to_datetime(game_log["GAME_DATE"])
+        game_log = game_log.sort_values("GAME_DATE", ascending=False)
+
+        most_recent = game_log.iloc[0]
+        formatted_date = most_recent["GAME_DATE"].strftime("%m/%d")
+
+        # Advanced metrics for last game
+        if most_recent["FGA"] > 0:
+            efg = (most_recent["FGM"] + 0.5 * most_recent["FG3M"]) / most_recent["FGA"]
+        else:
+            efg = 0.0
+
+        tsa = most_recent["FGA"] + 0.44 * most_recent["FTA"]
+        if tsa > 0:
+            ts = most_recent["PTS"] / (2 * tsa)
+        else:
+            ts = 0.0
+
+        last_game = {
+            "matchup": most_recent["MATCHUP"],
+            "date": formatted_date,
+            "pts": int(most_recent["PTS"]),
+            "ast": int(most_recent["AST"]),
+            "reb": int(most_recent["REB"]),
+            "stl": int(most_recent["STL"]),
+            "blk": int(most_recent["BLK"]),
+            "tov": int(most_recent["TOV"]),
+
+            "fgm": int(most_recent["FGM"]),
+            "fga": int(most_recent["FGA"]),
+            "fg_pct": float(most_recent["FG_PCT"]),
+
+            "three_pm": int(most_recent["FG3M"]),
+            "three_pa": int(most_recent["FG3A"]),
+            "fg3_pct": float(most_recent["FG3_PCT"]),
+
+            "ftm": int(most_recent["FTM"]),
+            "fta": int(most_recent["FTA"]),
+            "ft_pct": float(most_recent["FT_PCT"]),
+
+            "efg_pct": round(efg, 3),
+            "ts_pct": round(ts, 3),
+        }
+        
+    # -------------------------
     # Base season stats
     # -------------------------
     season_stats = {
@@ -111,7 +161,7 @@ def build_player_summary(player_id: int):
         "name": data["name"],
         "season": str(latest["SEASON_ID"]),
         "season_stats": season_stats,
-        "last_game": None,
+        "last_game": last_game,
         "headshot_url": f"https://cdn.nba.com/headshots/nba/latest/1040x760/{player_id}.png"
     }
 

@@ -5,11 +5,14 @@ from services.fetch_service import fetch_player_data
 player_cache = db["player_cache"]
 fetch_queue = db["fetch_queue"]
 
+MAX_PER_RUN = 5  # adjust as needed
 
 def run_queue():
     print("Worker started.")
 
-    while True:
+    processed = 0
+
+    while processed < MAX_PER_RUN:
         job = fetch_queue.find_one()
         if not job:
             break
@@ -38,8 +41,10 @@ def run_queue():
             print("Fetch failed:", e)
 
         fetch_queue.delete_one({"_id": job["_id"]})
+        processed += 1
+
+    print(f"Processed {processed} players this run.")
 
 
 if __name__ == "__main__":
     run_queue()
-

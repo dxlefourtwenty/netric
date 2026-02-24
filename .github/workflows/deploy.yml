@@ -1,0 +1,31 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd /home/ec2-user/netric
+            git pull origin main
+
+            # ----- FRONTEND BUILD -----
+            cd frontend
+            make re-compile
+            cd ..
+
+            # ----- BACKEND RESTART -----
+            source backend/venv/bin/activate
+            pkill uvicorn || true
+            nohup uvicorn backend.main:app --host 0.0.0.0 --port 8000 > uvicorn.log 2>&1 &

@@ -18,7 +18,8 @@ export default function PlayerInfo() {
       .catch(err => console.error(err))
   }, [id])
 
-  if (!data) return <div className="p-8 text-white">Loading...</div>
+  if (!data || !data.season_stats)
+    return <div className="p-8 text-white">Loading...</div>
 
   return (
     <div className="relative p-8 bg-gray-900 min-h-screen text-white">

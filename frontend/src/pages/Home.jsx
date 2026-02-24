@@ -24,17 +24,16 @@ export default function Home() {
     }
 
     axios
-    .get(`${API_BASE}/favorites`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((res) => setFavorites(res.data))
-    .catch((err) => {
-      if (err?.response?.status === 401) navigate("/login")
-      // else show an error, don’t redirect
-      console.error(err)
-    })
+      .get(`${API_BASE}/favorites`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setFavorites(res.data))
+      .catch((err) => {
+        if (err?.response?.status === 401) navigate("/login")
+        console.error(err)
+      })
 
-  }, [token, navigate])
+  }, [token, navigate, API_BASE])
 
   return (
     <div className="p-8 bg-gray-900 min-h-screen text-white">

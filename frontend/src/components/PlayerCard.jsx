@@ -44,7 +44,7 @@ export default function PlayerCard({
       <p>PTS: {season_stats.pts}</p>
       <p>AST: {season_stats.ast}</p>
       <p>REB: {season_stats.reb}</p>
-      <p>FG%: {(season_stats.fg_pct * 100).toFixed(1)}%</p>
+      <p>FG%: {season_stats.fg_pct ? (season_stats.fg_pct * 100).toFixed(1) : "0.0"}%</p>
 
       {last_game && (
         <>

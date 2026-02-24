@@ -13,7 +13,7 @@ export default function PlayerSummaryCard({ player }) {
       .get(`${API_BASE}/player/${player.id}/summary`)
       .then(res => setSummary(res.data))
       .catch(err => console.error(err))
-  }, [player.id])
+  }, [player.id, API_BASE])
 
   if (!summary) {
     return (
@@ -24,11 +24,15 @@ export default function PlayerSummaryCard({ player }) {
   }
 
   function formatStat(stat, decimals = 1) {
-    if (stat == null || stat == undefined || isNaN(stat)) {
+    if (!summary?.season_stats?.gp || summary.season_stats.gp === 0) {
       return "0.0"
     }
 
-    return Number(Number(stat) / Number(summary.season_stats.gp)).toFixed(decimals);
+    if (stat == null || isNaN(stat)) {
+      return "0.0"
+    }
+
+    return (Number(stat) / Number(summary.season_stats.gp)).toFixed(decimals)
   }
 
   function formatPct(stat, decimals = 1) {
@@ -46,7 +50,7 @@ export default function PlayerSummaryCard({ player }) {
 
     try {
       await axios.delete(
-        `http://127.0.0.1:8000/favorites/player/${player.id}`,
+        `${API_BASE}/favorites/player/${player.id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

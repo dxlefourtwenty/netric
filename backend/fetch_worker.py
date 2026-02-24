@@ -20,7 +20,7 @@ def fetch_player(name):
         {
             "$set": {
                 "player_id": player_id,
-                "data": summary,
+                "summary": summary,
                 "last_updated": datetime.utcnow()
             }
         },

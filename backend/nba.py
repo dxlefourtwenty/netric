@@ -2,103 +2,117 @@ import pandas as pd
 from datetime import datetime
 from nba_api.stats.static import players
 from nba_api.stats.endpoints import playercareerstats, playergamelog
+from services.fetch_service import fetch_player_by_name
+from fastapi import HTTPException
+
+from database import db
+
+player_cache = db["player_cache"]
+fetch_queue = db["fetch_queue"]
+
+def search_player_stats(name: str):
+    results = players.find_players_by_full_name(name)
+    if not results:
+        raise HTTPException(status_code=404, detail="Player not found")
+
+    player_id = results[0]["id"]
+
+    cached = player_cache.find_one({"player_id": player_id})
+
+    if cached:
+        return build_player_summary(player_id)
+
+    fetch_queue.update_one(
+        {"player_id": player_id},
+        {"$set": {"player_id": player_id, "name": name}},
+        upsert=True
+    )
+
+    raise HTTPException(
+        status_code=404,
+        detail="Player not cached yet. Fetch scheduled."
+    )
 
 def build_player_summary(player_id: int):
-    player_info = players.find_player_by_id(player_id)
-    if not player_info:
-        raise Exception("Player not found")
+    cached = player_cache.find_one({"player_id": player_id})
 
-    player_name = player_info["full_name"]
+    if not cached:
+        raise HTTPException(status_code=404, detail="Player not cached")
 
-    # Career stats
-    career = playercareerstats.PlayerCareerStats(
-        player_id=player_id,
-        timeout=30
-    )
-    df = career.get_data_frames()[0]
+    # If already formatted summary exists
+    if "summary" in cached:
+        return cached["summary"]
 
-    if df.empty:
-        raise Exception("No stats found")
+    # Otherwise build summary from legacy "data"
+    if "data" not in cached:
+        raise HTTPException(status_code=404, detail="Invalid cache format")
 
-    df = df[df["GP"] > 0]
-    df = df.sort_values("SEASON_ID", ascending=False)
-    latest = df.iloc[0]
+    data = cached["data"]
 
-    pts = float(latest["PTS"])
-    ast = float(latest["AST"])
-    reb = float(latest["REB"])
-    stl = float(latest["STL"])
-    blk = float(latest["BLK"])
-    tov = float(latest["TOV"])
-    min_total = float(latest["MIN"])
+    career_stats = pd.DataFrame(data["career_stats"])
+    game_log = pd.DataFrame(data["game_log"])
 
-    fg_pct = float(latest["FG_PCT"])
-    fg3_pct = float(latest["FG3_PCT"])
+    career_stats = career_stats[career_stats["GP"] > 0]
+    career_stats = career_stats.sort_values("SEASON_ID", ascending=False)
 
-    fgm = float(latest["FGM"])
-    fga = float(latest["FGA"])
-    fg3m = float(latest["FG3M"])
-    fg3a = float(latest["FG3A"])
-    fta = float(latest["FTA"])
-    ftm = float(latest["FTM"])
-    gp = int(latest["GP"])
+    latest = career_stats.iloc[0]
 
-    fg2pm = fgm - fg3m
-    fg2pa = fga - fg3a
+    # -------------------------
+    # Base season stats
+    # -------------------------
+    season_stats = {
+        "gp": int(latest["GP"]),
+        "min_total": float(latest["MIN"]),
+        "pts": float(latest["PTS"]),
+        "ast": float(latest["AST"]),
+        "reb": float(latest["REB"]),
+        "stl": float(latest["STL"]),
+        "blk": float(latest["BLK"]),
+        "tov": float(latest["TOV"]),
 
-    ts_pct = pts / (2 * (fga + 0.44 * fta)) if (fga + 0.44 * fta) > 0 else 0
-    efg_pct = (fgm + 0.5 * fg3m) / fga if fga > 0 else 0
+        "fgm": float(latest["FGM"]),
+        "fga": float(latest["FGA"]),
+        "fg_pct": float(latest["FG_PCT"]),
 
-    if not cached or "data" not in cached:
-        raise HTTPException(status_code=404, detail="Player not cached yet")
+        "three_pm": float(latest["FG3M"]),
+        "three_pa": float(latest["FG3A"]),
+        "fg3_pct": float(latest["FG3_PCT"]),
 
-    # Last game
-    gamelog = playergamelog.PlayerGameLog(
-        player_id=player_id,
-        timeout=30
-    )
-    games_df = gamelog.get_data_frames()[0]
+        "ftm": float(latest["FTM"]),
+        "fta": float(latest["FTA"]),
+        "ft_pct": float(latest["FT_PCT"]),
+    }
 
-    last_game_data = None
-    if not games_df.empty:
-        games_df["GAME_DATE"] = pd.to_datetime(games_df["GAME_DATE"])
-        games_df = games_df.sort_values("GAME_DATE", ascending=False)
-        last = games_df.iloc[0]
+    # -------------------------
+    # Advanced metrics
+    # -------------------------
+    if latest["FGA"] > 0:
+        efg = (latest["FGM"] + 0.5 * latest["FG3M"]) / latest["FGA"]
+    else:
+        efg = 0.0
 
-        last_game_data = {
-            "date": last["GAME_DATE"].strftime("%m/%d"),
-            "matchup": str(last["MATCHUP"]),
-            "pts": int(last["PTS"]),
-            "ast": int(last["AST"]),
-            "reb": int(last["REB"]),
-        }
+    tsa = latest["FGA"] + 0.44 * latest["FTA"]
+    if tsa > 0:
+        ts = latest["PTS"] / (2 * tsa)
+    else:
+        ts = 0.0
 
-    return {
+    season_stats["efg_pct"] = round(efg, 3)
+    season_stats["ts_pct"] = round(ts, 3)
+
+    season_stats["fg2pm"] = float(latest["FGM"]) - float(latest["FG3M"])
+    season_stats["fg2pa"] = float(latest["FGA"]) - float(latest["FG3A"])
+
+    # -------------------------
+    # Final summary
+    # -------------------------
+    summary = {
         "player_id": int(player_id),
-        "name": player_name,
+        "name": data["name"],
         "season": str(latest["SEASON_ID"]),
-        "season_stats": {
-            "pts": pts,
-            "ast": ast,
-            "reb": reb,
-            "stl": stl,
-            "blk": blk,
-            "tov": tov,
-            "min_total": min_total,
-            "gp": gp,
-            "fg_pct": fg_pct,
-            "fg3_pct": fg3_pct,
-            "fgm": fgm,
-            "fga": fga,
-            "fg2pm": fg2pm,
-            "fg2pa": fg2pa,
-            "three_pm": fg3m,
-            "three_pa": fg3a,
-            "fta": fta,
-            "ftm": ftm,
-            "ts_pct": ts_pct,
-            "efg_pct": efg_pct,
-        },
-        "last_game": last_game_data,
+        "season_stats": season_stats,
+        "last_game": None,
         "headshot_url": f"https://cdn.nba.com/headshots/nba/latest/1040x760/{player_id}.png"
     }
+
+    return summary

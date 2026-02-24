@@ -10,13 +10,13 @@ from auth import (
     remove_favorite_player
 )
 
-from nba import search_player_stats
 from database import db
 
 app = FastAPI()
 
 # Mongo collection
 player_cache = db["player_cache"]
+fetch_queue = db["fetch_queue"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -26,9 +26,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ---------------------------
-# SEARCH (still allowed)
-# ---------------------------
+from nba import search_player_stats, build_player_summary
 
 @app.get("/search/players/{name}")
 def search_player(name: str):
@@ -67,14 +65,21 @@ def delete_favorite_player(player_id: int, authorization: str = Header(None)):
 # ---------------------------
 
 @app.get("/player/{player_id}/summary")
-def player_summary(player_id: int):
+def get_player_summary(player_id: int):
     cached = player_cache.find_one({"player_id": player_id})
+
     if not cached:
+        fetch_queue.update_one(
+            {"player_id": player_id},
+            {"$set": {"player_id": player_id}},
+            upsert=True
+        )
         raise HTTPException(
             status_code=404,
-            detail="Player not cached yet."
+            detail="Player not cached yet. Fetch scheduled."
         )
-    return cached["data"]
+
+    return build_player_summary(player_id)
 
 # ---------------------------
 # DEBUG

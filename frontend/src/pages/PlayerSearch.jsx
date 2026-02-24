@@ -22,14 +22,28 @@ export default function PlayerSearch() {
 
       const encodedName = encodeURIComponent(name.trim())
 
-      const res = await axios.get(
-        `${API_BASE}/search/${category}/${encodedName}`
-      )
+      const fetchData = async () => {
+        try {
+          const res = await axios.get(
+            `${API_BASE}/search/${category}/${encodedName}`
+          )
+          setStats(res.data)
+          setLoading(false)
+        } catch (err) {
+          if (err.response?.status === 404) {
+            // Keep retrying every 3 seconds
+            setTimeout(fetchData, 3000)
+          } else {
+            setError("Player not found or server error.")
+            setLoading(false)
+          }
+        }
+      }
 
-      setStats(res.data)
+      fetchData()
+
     } catch (err) {
       setError("Player not found or server error.")
-    } finally {
       setLoading(false)
     }
   }

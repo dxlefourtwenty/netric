@@ -9,22 +9,46 @@ export default function PlayerSummaryCard({ player }) {
   const API_BASE = import.meta.env.VITE_API_BASE  
 
   useEffect(() => {
-    axios
-      .get(`${API_BASE}/player/${player.id}/summary`)
-      .then(res => setSummary(res.data))
-      .catch(err => {
-          if (err.response?.status === 404) {
-	  setSummary("not_cached")
+    let interval
+
+    const fetchSummary = async () => {
+      try {
+        const res = await axios.get(
+        `  ${API_BASE}/player/${player.id}/summary`
+        )
+        setSummary(res.data)
+  
+        // If success, stop retrying
+        if (interval) clearInterval(interval)
+
+      } catch (err) {
+        if (err.response?.status === 404) {
+          setSummary("not_cached")
+
+          // Retry every 5 seconds
+          if (!interval) {
+            interval = setInterval(fetchSummary, 5000)
+          }
         } else {
-	  console.error(err)
+          console.error(err)
         }
-      })
+      }
+    }
+
+    fetchSummary()
+
+    return () => {
+      if (interval) clearInterval(interval)
+    }
+
   }, [player.id])
 
-  if (summary === null ) {
+  if (summary == null) {
     return (
       <div className="bg-gray-700 p-4 rounded mb-3">
-        Loading {player.name}...
+        {summary === "not_cached"
+	  ? `${player.name} not cached yet.`
+	  : `Loading ${player.name}...`}
       </div>
     )
   }
@@ -93,7 +117,8 @@ export default function PlayerSummaryCard({ player }) {
       <div className="flex flex-row justify-between mx-2 items-center">
         <div className="flex flex-col items-center gap-5">
           <h2 className="font-semibold text-xl">{player.name}</h2>
-          <img src={summary.headshot_url} className="w-45 h-33"/>
+	  {summary.headshot_url && (
+            <img src={summary.headshot_url} className="w-45 h-33"/>)}
         </div>
         <div className="flex flex-col mt-2 text-lg items-center">
           <p>{summary.season} Season Stats</p>

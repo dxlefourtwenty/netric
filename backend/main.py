@@ -1,5 +1,8 @@
+from pathlib import Path
+
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 from models import AuthRequest
 from auth import (
@@ -13,6 +16,7 @@ from auth import (
 from database import db
 
 app = FastAPI()
+frontend_dist = Path(__file__).resolve().parent.parent / "frontend" / "dist"
 
 # Mongo collection
 player_cache = db["player_cache"]
@@ -89,3 +93,16 @@ def get_player_summary(player_id: int):
 def clear_player_cache(player_id: int):
     player_cache.delete_one({"player_id": player_id})
     return {"message": "Cache cleared"}
+
+
+@app.get("/{full_path:path}")
+def serve_frontend(full_path: str):
+    if not frontend_dist.exists():
+        raise HTTPException(status_code=404, detail="Frontend build not found.")
+
+    requested_path = (frontend_dist / full_path).resolve()
+
+    if full_path and requested_path.is_file() and requested_path.is_relative_to(frontend_dist):
+        return FileResponse(requested_path)
+
+    return FileResponse(frontend_dist / "index.html")

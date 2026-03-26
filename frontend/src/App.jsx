@@ -1,10 +1,11 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate, Outlet, useLocation } from "react-router-dom"
 import { useEffect } from "react"
 import Home from "./pages/Home"
 import PlayerSearch from "./pages/PlayerSearch"
 import Login from "./pages/Login"
 import Register from "./pages/Register"
 import PlayerInfo from "./pages/PlayerInfo"
+import { isAuthenticated } from "./auth"
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -20,17 +21,41 @@ function ScrollToTop() {
   return null
 }
 
+function ProtectedRoutes() {
+  const location = useLocation()
+
+  if (!isAuthenticated()) {
+    return <Navigate to="/login" replace state={{ from: location }} />
+  }
+
+  return <Outlet />
+}
+
+function PublicOnlyRoutes() {
+  if (isAuthenticated()) {
+    return <Navigate to="/" replace />
+  }
+
+  return <Outlet />
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/search" element={<PlayerSearch />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/player/:id" element={<PlayerInfo />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route element={<PublicOnlyRoutes />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<PlayerSearch />} />
+          <Route path="/player/:id" element={<PlayerInfo />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to={isAuthenticated() ? "/" : "/login"} replace />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TIMER="netric-nightly-refresh.timer"
+SERVICE="netric-nightly-refresh.service"
+SCRIPT_DIR="$(cd -- "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")" && pwd)"
+REPO_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+UNIT_SRC_DIR="$REPO_ROOT/ops/systemd"
+USER_UNIT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user"
+
+usage() {
+  cat <<'EOF'
+Usage: netric-toggle-cron <on|off|status|run-now>
+
+  on      Install, enable, and start the daily 8am timer
+  off     Disable and stop the nightly timer
+  status  Show timer and service status
+  run-now Run the refresh service immediately
+EOF
+}
+
+require_systemctl() {
+  if ! command -v systemctl >/dev/null 2>&1; then
+    echo "systemctl is required." >&2
+    exit 1
+  fi
+}
+
+install_units() {
+  mkdir -p "$USER_UNIT_DIR"
+  ln -sf "$UNIT_SRC_DIR/$SERVICE" "$USER_UNIT_DIR/$SERVICE"
+  ln -sf "$UNIT_SRC_DIR/$TIMER" "$USER_UNIT_DIR/$TIMER"
+}
+
+show_status() {
+  systemctl --user status "$TIMER" --no-pager || true
+  echo
+  systemctl --user list-timers "$TIMER" --all --no-pager || true
+  echo
+  systemctl --user status "$SERVICE" --no-pager || true
+}
+
+main() {
+  require_systemctl
+
+  case "${1:-status}" in
+    on)
+      install_units
+      systemctl --user daemon-reload
+      systemctl --user enable --now "$TIMER"
+      show_status
+      ;;
+    off)
+      systemctl --user disable --now "$TIMER"
+      show_status
+      ;;
+    status)
+      show_status
+      ;;
+    run-now)
+      install_units
+      systemctl --user daemon-reload
+      systemctl --user start "$SERVICE"
+      systemctl --user status "$SERVICE" --no-pager || true
+      ;;
+    *)
+      usage
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

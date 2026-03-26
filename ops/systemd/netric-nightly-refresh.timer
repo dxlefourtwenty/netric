@@ -1,0 +1,10 @@
+[Unit]
+Description=Run Netric nightly NBA refresh at 8am
+
+[Timer]
+OnCalendar=*-*-* 08:00:00
+Persistent=true
+Unit=netric-nightly-refresh.service
+
+[Install]
+WantedBy=timers.target

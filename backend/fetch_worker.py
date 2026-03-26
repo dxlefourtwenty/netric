@@ -44,6 +44,7 @@ def run_queue():
         processed += 1
 
     print(f"Processed {processed} players this run.")
+    return processed
 
 
 if __name__ == "__main__":

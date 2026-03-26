@@ -45,7 +45,7 @@ export default function Register() {
                   Register
                 </h2>
                 <p className="mt-2 text-sm text-slate-300 sm:text-base">
-                  Create an account to start building your personalized stat dashboard with Netric!
+                  Create an account to start building your personalized stat-dashboard with Netric!
                 </p>
               </div>
 
@@ -103,7 +103,7 @@ export default function Register() {
                   onClick={() => navigate("/login")}
                   className="mt-2 text-sm font-medium text-amber-200 transition-colors duration-300 hover:text-white"
                 >
-                  Sign in instead
+                  Sign in instead.
                 </button>
               </div>
             </div>
@@ -120,7 +120,7 @@ export default function Register() {
                 Save players, track favorites, and keep the dashboard ready.
               </h1>
               <p className="mt-4 max-w-md text-base text-slate-300">
-                Once registered, you can favorite players from search, return to a cached home dashboard, and drill into the refreshed profile views.
+                Once registered, you can favorite players from search, return to a home dashboard, and drill into the refreshed profile views.
               </p>
             </div>
 
@@ -128,13 +128,13 @@ export default function Register() {
               <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/35 p-5">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Faster Returns</p>
                 <p className="mt-3 text-sm text-slate-200">
-                  Favorite data and player summaries are stored locally so repeat visits don&apos;t feel empty while the API refetches.
+                  Our service is lightning-quick, allowing you to view your favorite stats with a single click.
                 </p>
               </div>
               <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/35 p-5">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Cleaner Experience</p>
                 <p className="mt-3 text-sm text-slate-200">
-                  The auth flow now matches the rest of the app with the same glass treatment and upward reveal motion.
+                  No need to dig around giant stat databases, Netric will handle all of that just for you.
                 </p>
               </div>
             </div>

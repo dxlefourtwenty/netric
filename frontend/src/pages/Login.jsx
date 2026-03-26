@@ -58,11 +58,11 @@ export default function Login() {
               <div className="mt-4 grid gap-3">
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
                   <p className="text-sm font-medium text-white">Favorite players</p>
-                  <p className="mt-1 text-sm text-slate-300">Load quickly from browser cache, then refresh in the background.</p>
+                  <p className="mt-1 text-sm text-slate-300">All of the players you desire to track closely in one handy place.</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
                   <p className="text-sm font-medium text-white">Player search</p>
-                  <p className="mt-1 text-sm text-slate-300">Find players, inspect current summaries, and favorite them from one flow.</p>
+                  <p className="mt-1 text-sm text-slate-300">Find players, teams, or stat categories, inspect current summaries, and favorite them in a singular flow.</p>
                 </div>
               </div>
             </div>
@@ -78,7 +78,7 @@ export default function Login() {
                   Sign in
                 </h2>
                 <p className="mt-2 text-sm text-slate-300 sm:text-base">
-                  Use your account credentials to return to the dashboard.
+                  Input your account credentials to return to the dashboard.
                 </p>
               </div>
 
@@ -136,7 +136,7 @@ export default function Login() {
                   onClick={() => navigate("/register")}
                   className="mt-2 text-sm font-medium text-blue-300 transition-colors duration-300 hover:text-white"
                 >
-                  Create one here
+                  Create one here.
                 </button>
               </div>
             </div>

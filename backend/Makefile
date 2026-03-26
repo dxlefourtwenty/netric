@@ -29,7 +29,7 @@ install:
 # Run development server
 # -------------------------
 run:
-	$(UVICORN) $(APP) --reload --host $(HOST) --port $(PORT)
+	nohup $(UVICORN) $(APP) --reload --host $(HOST) --port $(PORT) &
 
 # -------------------------
 # Production run (no reload)

@@ -1,0 +1,14 @@
+/home/ec2-user/netric/backend/refresh_db.py:24: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  "queued_at": datetime.utcnow()
+✅ MongoDB connected
+Queued 533 players for refresh.
+✅ MongoDB connected
+Queued 0 players for refresh.
+✅ MongoDB connected
+Queued 0 players for refresh.
+✅ MongoDB connected
+Queued 0 players for refresh.
+✅ MongoDB connected
+Queued 0 players for refresh.
+✅ MongoDB connected
+Queued 0 players for refresh.

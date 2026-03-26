@@ -1,0 +1,79 @@
+✅ MongoDB connected
+Queued: Alex Antetokounmpo
+Queued: Deni Avdija
+Queued: Desmond Bane
+Queued: Dominick Barlow
+Queued: Harrison Barnes
+Queued: Brooks Barnhizer
+Queued: RJ Barrett
+Queued: Charles Bassey
+Queued: Tamar Bates
+Traceback (most recent call last):
+  File "/home/ec2-user/netric/backend/seed_active_players.py", line 47, in <module>
+    seed_active_players()
+  File "/home/ec2-user/netric/backend/seed_active_players.py", line 30, in seed_active_players
+    fetch_queue.insert_one({
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/collection.py", line 705, in insert_one
+    self._insert(document,
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/collection.py", line 620, in _insert
+    return self._insert_one(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/collection.py", line 609, in _insert_one
+    self.__database.client._retryable_write(
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/mongo_client.py", line 1552, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/mongo_client.py", line 1438, in _retry_with_session
+    return self._retry_internal(retryable, func, session, bulk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/mongo_client.py", line 1470, in _retry_internal
+    return func(session, sock_info, retryable)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/collection.py", line 597, in _insert_command
+    result = sock_info.command(
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/pool.py", line 726, in command
+    self._raise_connection_failure(error)
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/pool.py", line 710, in command
+    return command(self, dbname, spec, secondary_ok,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/network.py", line 149, in command
+    reply = receive_message(sock_info, request_id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/network.py", line 196, in receive_message
+    _receive_data_on_socket(sock_info, 16, deadline))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ec2-user/netric/backend/venv/lib64/python3.12/site-packages/pymongo/network.py", line 287, in _receive_data_on_socket
+    chunk_length = sock_info.sock.recv_into(mv[bytes_read:])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.12/ssl.py", line 1251, in recv_into
+    return self.read(nbytes, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.12/ssl.py", line 1103, in read
+    return self._sslobj.read(len, buffer)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+INFO:     Will watch for changes in these directories: ['/home/ec2-user/netric/backend']
+ERROR:    [Errno 98] Address already in use
+INFO:     Will watch for changes in these directories: ['/home/ec2-user/netric/backend']
+ERROR:    [Errno 98] Address already in use
+INFO:     Will watch for changes in these directories: ['/home/ec2-user/netric/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [2612] using StatReload
+INFO:     Started server process [2614]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+MongoDB connected on attempt 1.
+INFO:     47.157.222.149:60814 - "GET / HTTP/1.1" 404 Not Found
+INFO:     47.157.222.149:60814 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     47.157.222.149:37502 - "GET / HTTP/1.1" 404 Not Found
+INFO:     47.157.222.149:37502 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     47.157.222.149:37512 - "GET / HTTP/1.1" 404 Not Found
+INFO:     47.157.222.149:60818 - "GET / HTTP/1.1" 404 Not Found
+INFO:     47.157.222.149:39766 - "GET /login HTTP/1.1" 405 Method Not Allowed
+INFO:     47.157.222.149:39766 - "GET /register HTTP/1.1" 405 Method Not Allowed
+INFO:     47.157.222.149:39762 - "GET /register HTTP/1.1" 405 Method Not Allowed
+INFO:     47.157.222.149:48054 - "GET /login HTTP/1.1" 405 Method Not Allowed
+INFO:     47.157.222.149:40428 - "GET /docs HTTP/1.1" 200 OK
+INFO:     47.157.222.149:40428 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     47.157.222.149:43380 - "GET /login HTTP/1.1" 405 Method Not Allowed

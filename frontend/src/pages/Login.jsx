@@ -49,7 +49,7 @@ export default function Login() {
                 Basketball insights with a cleaner front door.
               </h1>
               <p className="mt-4 max-w-md text-base text-slate-300">
-                Sign in to jump back into favorites, cached player summaries, and the updated stat views.
+                Sign in to jump back into favorites, player summaries, and the updated stat views.
               </p>
             </div>
 

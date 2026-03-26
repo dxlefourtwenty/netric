@@ -45,7 +45,7 @@ export default function Register() {
                   Register
                 </h2>
                 <p className="mt-2 text-sm text-slate-300 sm:text-base">
-                  Create an account to save players, return faster with favorites, and keep your dashboard personalized.
+                  Create an account to start building your personalized stat dashboard with Netric!
                 </p>
               </div>
 

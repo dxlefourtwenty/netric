@@ -3,6 +3,7 @@ import axios from "axios"
 import PlayerCard from "../components/PlayerCard"
 import ReturnHome from "../components/ReturnHome"
 import { API_BASE } from "../api"
+import { writePlayerSummaryCache } from "../utils/playerSummaryCache"
 
 const CATEGORY_LABELS = {
   players: "Players",
@@ -33,6 +34,9 @@ export default function PlayerSearch() {
         try {
           const res = await axios.get(`${API_BASE}/search/${category}/${encodedName}`)
           setStats(res.data)
+          if (category === "players" && res.data?.player_id) {
+            writePlayerSummaryCache(res.data.player_id, res.data)
+          }
           setLoading(false)
         } catch (err) {
           if (err.response?.status === 404) {

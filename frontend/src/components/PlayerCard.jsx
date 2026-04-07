@@ -120,10 +120,13 @@ export default function PlayerCard({
   season,
   season_stats,
   last_game,
+  last_5_games,
+  season_game_log,
   headshot_url,
 }) {
   const token = typeof window !== "undefined" ? window.localStorage.getItem("token") : null
   const [isFavorited, setIsFavorited] = useState(() => isPlayerFavorited(token, player_id))
+  const [showSeasonGameLog, setShowSeasonGameLog] = useState(false)
 
   function formatNumber(value, decimals = 1) {
     if (value == null || Number.isNaN(Number(value))) {
@@ -159,6 +162,14 @@ export default function PlayerCard({
     }
 
     return Number((Number(makes) / Number(attempts)) * 100).toFixed(decimals)
+  }
+
+  function formatSignedNumber(value) {
+    if (value == null || Number.isNaN(Number(value))) {
+      return "0"
+    }
+
+    return Number(value) > 0 ? `+${Number(value)}` : `${Number(value)}`
   }
 
   const handleFavorite = async () => {
@@ -306,6 +317,105 @@ export default function PlayerCard({
               <p className="mt-3 text-sm text-slate-200">
                 {formatNumber(last_game.pts, 0)} PTS / {formatNumber(last_game.ast, 0)} AST / {formatNumber(last_game.reb, 0)} REB
               </p>
+            </div>
+          )}
+
+          {Array.isArray(last_5_games) && last_5_games.length > 0 && (
+            <div className="rounded-[1.5rem] border border-white/10 bg-slate-950/35 p-5">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.18em] text-slate-400">Last 5 Games</p>
+                  <p className="mt-1 text-sm text-slate-300">
+                    Click any game to {showSeasonGameLog ? "hide" : "show"} the full season log.
+                  </p>
+                </div>
+
+                <button
+                  onClick={() => setShowSeasonGameLog(current => !current)}
+                  className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
+                >
+                  {showSeasonGameLog ? "Hide Season Log" : "Show Season Log"}
+                </button>
+              </div>
+
+              <div className="mt-4 grid gap-3 xl:grid-cols-5">
+                {last_5_games.map(game => (
+                  <button
+                    key={`${game.game_id || game.game_date || game.matchup}-${game.date}`}
+                    onClick={() => setShowSeasonGameLog(current => !current)}
+                    className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/8 to-white/0 px-4 py-4 text-left transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/25 hover:bg-white/10"
+                  >
+                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{game.date}</p>
+                    <h3 className="mt-2 text-sm font-semibold text-white">{game.matchup}</h3>
+                    <p className="mt-1 text-xs text-slate-300">{game.result || "Pending"}</p>
+
+                    <div className="mt-4 grid grid-cols-2 gap-2 text-sm text-slate-200">
+                      <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                        <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">PTS</p>
+                        <p className="mt-1 font-medium text-white">{formatNumber(game.pts, 0)}</p>
+                      </div>
+                      <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                        <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">REB</p>
+                        <p className="mt-1 font-medium text-white">{formatNumber(game.reb, 0)}</p>
+                      </div>
+                      <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                        <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">AST</p>
+                        <p className="mt-1 font-medium text-white">{formatNumber(game.ast, 0)}</p>
+                      </div>
+                      <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2">
+                        <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">PR</p>
+                        <p className="mt-1 font-medium text-white">{formatNumber(game.pr, 0)}</p>
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+
+              {showSeasonGameLog && Array.isArray(season_game_log) && season_game_log.length > 0 && (
+                <div className="mt-5 overflow-hidden rounded-[1.25rem] border border-white/10 bg-slate-900/55 animate-content-in">
+                  <div className="flex items-center justify-between border-b border-white/10 px-4 py-3">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Season Game Log</p>
+                      <p className="mt-1 text-sm text-slate-300">{season_game_log.length} games cached</p>
+                    </div>
+                  </div>
+
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full text-left text-sm text-slate-200">
+                      <thead className="bg-white/5 text-xs uppercase tracking-[0.18em] text-slate-400">
+                        <tr>
+                          <th className="px-4 py-3 font-medium">Date</th>
+                          <th className="px-4 py-3 font-medium">Matchup</th>
+                          <th className="px-4 py-3 font-medium">Result</th>
+                          <th className="px-4 py-3 font-medium">MIN</th>
+                          <th className="px-4 py-3 font-medium">PTS</th>
+                          <th className="px-4 py-3 font-medium">REB</th>
+                          <th className="px-4 py-3 font-medium">AST</th>
+                          <th className="px-4 py-3 font-medium">PR</th>
+                          <th className="px-4 py-3 font-medium">PRA</th>
+                          <th className="px-4 py-3 font-medium">+/-</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {season_game_log.map(game => (
+                          <tr key={`${game.game_id || game.game_date || game.matchup}-log`} className="border-t border-white/6">
+                            <td className="px-4 py-3 text-slate-300">{game.date}</td>
+                            <td className="px-4 py-3 font-medium text-white">{game.matchup}</td>
+                            <td className="px-4 py-3 text-slate-300">{game.result || "-"}</td>
+                            <td className="px-4 py-3 text-slate-300">{game.min || "-"}</td>
+                            <td className="px-4 py-3">{formatNumber(game.pts, 0)}</td>
+                            <td className="px-4 py-3">{formatNumber(game.reb, 0)}</td>
+                            <td className="px-4 py-3">{formatNumber(game.ast, 0)}</td>
+                            <td className="px-4 py-3">{formatNumber(game.pr, 0)}</td>
+                            <td className="px-4 py-3">{formatNumber(game.pra, 0)}</td>
+                            <td className="px-4 py-3">{formatSignedNumber(game.plus_minus)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>

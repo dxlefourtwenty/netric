@@ -2,66 +2,14 @@ import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { API_BASE } from "../api"
+import {
+  clearPlayerSummaryCache,
+  readPlayerSummaryCache,
+  writePlayerSummaryCache,
+} from "../utils/playerSummaryCache"
 
-const PLAYER_SUMMARY_CACHE_TTL = 1000 * 60 * 30
 const CONTEXT_MENU_WIDTH = 224
 const CONTEXT_MENU_PADDING = 16
-
-function getPlayerSummaryCacheKey(playerId) {
-  return `netric:player-summary:${playerId}`
-}
-
-function readPlayerSummaryCache(playerId) {
-  if (typeof window === "undefined") {
-    return null
-  }
-
-  try {
-    const rawCache = window.localStorage.getItem(getPlayerSummaryCacheKey(playerId))
-
-    if (!rawCache) {
-      return null
-    }
-
-    const parsedCache = JSON.parse(rawCache)
-
-    if (!parsedCache?.timestamp || Date.now() - parsedCache.timestamp > PLAYER_SUMMARY_CACHE_TTL) {
-      window.localStorage.removeItem(getPlayerSummaryCacheKey(playerId))
-      return null
-    }
-
-    return parsedCache.data ?? null
-  } catch (error) {
-    console.error("Failed to read player summary cache", error)
-    return null
-  }
-}
-
-function writePlayerSummaryCache(playerId, summary) {
-  if (typeof window === "undefined") {
-    return
-  }
-
-  try {
-    window.localStorage.setItem(
-      getPlayerSummaryCacheKey(playerId),
-      JSON.stringify({
-        timestamp: Date.now(),
-        data: summary,
-      })
-    )
-  } catch (error) {
-    console.error("Failed to write player summary cache", error)
-  }
-}
-
-function clearPlayerSummaryCache(playerId) {
-  if (typeof window === "undefined") {
-    return
-  }
-
-  window.localStorage.removeItem(getPlayerSummaryCacheKey(playerId))
-}
 
 export default function PlayerSummaryCard({
   player,
@@ -393,14 +341,21 @@ export default function PlayerSummaryCard({
           </div>
 
           {summary.last_game && (
-            <div className="mt-4 w-full max-w-[13.5rem] rounded-2xl border border-white/10 bg-gradient-to-br from-blue-500/10 to-emerald-400/10 px-4 py-4">
+            <button
+              onClick={event => {
+                event.stopPropagation()
+                setContextMenu(null)
+                navigate(`/player/${player.id}?tab=games&season=${encodeURIComponent(summary.season)}`)
+              }}
+              className="mt-4 w-full max-w-[13.5rem] rounded-2xl border border-white/10 bg-gradient-to-br from-blue-500/10 to-emerald-400/10 px-4 py-4 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-300/25 hover:from-blue-500/15 hover:to-emerald-400/15"
+            >
               <p className="text-xs uppercase tracking-[0.22em] text-emerald-100">Last Game</p>
               <p className="mt-2 text-sm text-white">{summary.last_game.matchup}</p>
               <p className="mt-1 text-xs text-slate-300">{summary.last_game.date}</p>
               <p className="mt-3 text-sm text-slate-200">
                 {formatNumber(summary.last_game.pts, 0)} PTS / {formatNumber(summary.last_game.ast, 0)} AST / {formatNumber(summary.last_game.reb, 0)} REB
               </p>
-            </div>
+            </button>
           )}
         </div>
 

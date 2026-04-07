@@ -15,10 +15,10 @@ uri = f"mongodb+srv://{user}:{pw}@{cluster}/netric?retryWrites=true&w=majority"
 
 connect_timeout_ms = int(os.getenv("MONGO_CONNECT_TIMEOUT_MS", "5000"))
 server_selection_timeout_ms = int(
-    os.getenv("MONGO_SERVER_SELECTION_TIMEOUT_MS", "5000")
+    os.getenv("MONGO_SERVER_SELECTION_TIMEOUT_MS", "15000")
 )
-init_retries = int(os.getenv("MONGO_INIT_RETRIES", "4"))
-retry_delay_seconds = float(os.getenv("MONGO_INIT_RETRY_DELAY_SECONDS", "5"))
+init_retries = int(os.getenv("MONGO_INIT_RETRIES", "12"))
+retry_delay_seconds = float(os.getenv("MONGO_INIT_RETRY_DELAY_SECONDS", "10"))
 
 
 def _connect_with_retry():

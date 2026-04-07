@@ -1,64 +1,20 @@
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
 
 import ReturnHome from "../components/ReturnHome"
 import { API_BASE } from "../api"
-
-const PLAYER_SUMMARY_CACHE_TTL = 1000 * 60 * 30
-
-function getPlayerSummaryCacheKey(playerId) {
-  return `netric:player-summary:${playerId}`
-}
-
-function readPlayerSummaryCache(playerId) {
-  if (typeof window === "undefined") {
-    return null
-  }
-
-  try {
-    const rawCache = window.localStorage.getItem(getPlayerSummaryCacheKey(playerId))
-
-    if (!rawCache) {
-      return null
-    }
-
-    const parsedCache = JSON.parse(rawCache)
-
-    if (!parsedCache?.timestamp || Date.now() - parsedCache.timestamp > PLAYER_SUMMARY_CACHE_TTL) {
-      window.localStorage.removeItem(getPlayerSummaryCacheKey(playerId))
-      return null
-    }
-
-    return parsedCache.data ?? null
-  } catch (error) {
-    console.error("Failed to read player summary cache", error)
-    return null
-  }
-}
-
-function writePlayerSummaryCache(playerId, summary) {
-  if (typeof window === "undefined") {
-    return
-  }
-
-  try {
-    window.localStorage.setItem(
-      getPlayerSummaryCacheKey(playerId),
-      JSON.stringify({
-        timestamp: Date.now(),
-        data: summary,
-      })
-    )
-  } catch (error) {
-    console.error("Failed to write player summary cache", error)
-  }
-}
+import { getGameLogKey } from "../utils/gameLog"
+import { readPlayerSummaryCache, writePlayerSummaryCache } from "../utils/playerSummaryCache"
 
 export default function PlayerInfo() {
+  const navigate = useNavigate()
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
   const cachedSummary = readPlayerSummaryCache(id)
-  const [tab, setTab] = useState("season")
+  const initialTab = searchParams.get("tab")
+  const [tab, setTab] = useState(initialTab === "games" ? "games" : "season")
+  const [selectedGameLogSeason, setSelectedGameLogSeason] = useState("")
   const [data, setData] = useState(cachedSummary)
   const [loading, setLoading] = useState(() => !cachedSummary)
 
@@ -92,6 +48,26 @@ export default function PlayerInfo() {
       ignore = true
     }
   }, [id])
+
+  useEffect(() => {
+    const nextTab = searchParams.get("tab")
+
+    if (nextTab === "games") {
+      setTab("games")
+    }
+  }, [searchParams])
+
+  useEffect(() => {
+    const availableSeasons = Array.isArray(data?.available_game_log_seasons) ? data.available_game_log_seasons : []
+    const requestedSeason = searchParams.get("season")
+    const nextSeason = availableSeasons.includes(requestedSeason)
+      ? requestedSeason
+      : availableSeasons[0] || data?.season || ""
+
+    setSelectedGameLogSeason(currentSeason =>
+      availableSeasons.includes(currentSeason) || currentSeason === nextSeason ? currentSeason : nextSeason
+    )
+  }, [data, searchParams])
 
   if (!data || !data.season_stats)
     return (
@@ -148,11 +124,19 @@ export default function PlayerInfo() {
     return Number((Number(makes) / Number(attempts)) * 100).toFixed(decimals)
   }
 
+  function formatSignedNumber(value) {
+    if (value == null || Number.isNaN(Number(value))) {
+      return "0"
+    }
+
+    return Number(value) > 0 ? `+${Number(value)}` : `${Number(value)}`
+  }
+
   const primaryStats = [
-    { label: "Points", value: formatStat(data.season_stats.pts), accent: "from-blue-500/30 to-cyan-400/10" },
-    { label: "Assists", value: formatStat(data.season_stats.ast), accent: "from-emerald-500/30 to-teal-400/10" },
-    { label: "Rebounds", value: formatStat(data.season_stats.reb), accent: "from-amber-500/30 to-orange-400/10" },
-    { label: "Steals", value: formatStat(data.season_stats.stl), accent: "from-fuchsia-500/30 to-pink-400/10" },
+    { label: "PTS", value: formatStat(data.season_stats.pts), accent: "from-blue-500/30 to-cyan-400/10" },
+    { label: "AST", value: formatStat(data.season_stats.ast), accent: "from-emerald-500/30 to-teal-400/10" },
+    { label: "REB", value: formatStat(data.season_stats.reb), accent: "from-amber-500/30 to-orange-400/10" },
+    { label: "TS%", value: formatPct(data.season_stats.ts_pct), accent: "from-fuchsia-500/30 to-pink-400/10" },
   ]
 
   const seasonSections = [
@@ -195,9 +179,24 @@ export default function PlayerInfo() {
 
   const tabs = [
     { id: "season", label: "Season" },
+    { id: "games", label: "Game Logs" },
     { id: "career", label: "Career" },
     { id: "advanced", label: "Advanced" },
   ]
+
+  const availableGameLogSeasons = Array.isArray(data.available_game_log_seasons) ? data.available_game_log_seasons : []
+  const seasonGameLogs = data.season_game_logs || {}
+  const activeGameLogSeason = selectedGameLogSeason || availableGameLogSeasons[0] || data.season || ""
+  const activeSeasonGameLog = Array.isArray(seasonGameLogs[activeGameLogSeason])
+    ? seasonGameLogs[activeGameLogSeason]
+    : Array.isArray(data.season_game_log)
+      ? data.season_game_log
+      : []
+
+  function openGameSummary(game, index) {
+    const gameKey = getGameLogKey(game, index)
+    navigate(`/player/${id}/games/${encodeURIComponent(gameKey)}?season=${encodeURIComponent(activeGameLogSeason)}`)
+  }
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 px-4 py-10 text-white sm:px-6 lg:px-8">
@@ -338,7 +337,187 @@ export default function PlayerInfo() {
                           Recent game data is not available for this player yet.
                         </div>
                       )}
+
+                      {Array.isArray(data.last_5_games) && data.last_5_games.length > 0 && (
+                        <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:border-white/15">
+                          <div className="flex items-center justify-between gap-4">
+                            <div>
+                              <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Last 5 Games</p>
+                              <p className="mt-2 text-sm text-slate-300">
+                                Click into the game log tab for the full season table.
+                              </p>
+                            </div>
+
+                            <button
+                              onClick={() => setTab("games")}
+                              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10"
+                            >
+                              Open Game Log
+                            </button>
+                          </div>
+
+                          <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-1">
+                            {data.last_5_games.map(game => (
+                              <button
+                                key={`${game.game_id || game.game_date || game.matchup}-preview`}
+                                onClick={() => setTab("games")}
+                                className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/6 to-white/0 px-4 py-4 text-left transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/25 hover:bg-white/10"
+                              >
+                                <div className="flex items-start justify-between gap-4">
+                                  <div>
+                                    <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{game.date}</p>
+                                    <h3 className="mt-2 text-sm font-semibold text-white">{game.matchup}</h3>
+                                    <p className="mt-1 text-xs text-slate-300">{game.result || "Pending"} • {game.min || "-"} MIN</p>
+                                  </div>
+
+                              <div className="grid grid-cols-2 gap-2 text-right text-sm">
+                                <div>
+                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">STL</p>
+                                      <p className="mt-1 font-semibold text-white">{formatNumber(game.stl, 0)}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">BLK</p>
+                                      <p className="mt-1 font-semibold text-white">{formatNumber(game.blk, 0)}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">TOV</p>
+                                      <p className="mt-1 font-semibold text-white">{formatNumber(game.tov, 0)}</p>
+                                    </div>
+                                    <div>
+                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">PF</p>
+                                      <p className="mt-1 font-semibold text-white">{formatNumber(game.pf, 0)}</p>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <div className="mt-4 grid grid-cols-3 gap-3">
+                                  <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center">
+                                    <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">PTS</p>
+                                    <p className="mt-1 font-medium text-white">{formatNumber(game.pts, 0)}</p>
+                                  </div>
+                                  <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center">
+                                    <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">REB</p>
+                                    <p className="mt-1 font-medium text-white">{formatNumber(game.reb, 0)}</p>
+                                  </div>
+                                  <div className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center">
+                                    <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">AST</p>
+                                    <p className="mt-1 font-medium text-white">{formatNumber(game.ast, 0)}</p>
+                                  </div>
+                                </div>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
+                  </div>
+                )}
+
+                {tab === "games" && (
+                  <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/55 p-5 shadow-lg shadow-black/20">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Season Game Logs</p>
+                        <h2 className="mt-2 text-2xl font-semibold text-white">
+                          {activeSeasonGameLog.length} games cached
+                        </h2>
+                        <p className="mt-2 text-sm text-slate-300">
+                          Full season game log with the expanded box score breakdown for each game.
+                        </p>
+                      </div>
+
+                      <label className="flex flex-col gap-2 text-sm text-slate-300 sm:items-start">
+                        <span className="text-xs uppercase tracking-[0.22em] text-slate-400 pl-2">Season</span>
+                        <select
+                          value={activeGameLogSeason}
+                          onChange={event => setSelectedGameLogSeason(event.target.value)}
+                          className="w-fit rounded-xl border border-white/10 bg-slate-950/70 pl-2 pr-1 py-2 text-white outline-none transition-colors duration-300 hover:border-white/20 focus:border-blue-300/40"
+                        >
+                          {availableGameLogSeasons.map(season => (
+                            <option key={season} value={season}>
+                              {season}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    </div>
+
+                    {activeSeasonGameLog.length > 0 ? (
+                      <div className="mt-5 overflow-hidden rounded-[1.25rem] border border-white/10 bg-slate-950/45 pb-3">
+                        <div className="game-log-scroll overflow-x-auto overflow-y-hidden [scrollbar-gutter:stable]">
+                          <table className="min-w-full w-max text-left text-sm text-slate-200">
+                            <thead className="bg-white/5 text-xs uppercase tracking-[0.18em] text-slate-400">
+                              <tr>
+                                <th className="px-4 py-3 font-medium">Date</th>
+                                <th className="px-4 py-3 font-medium">Matchup</th>
+                                <th className="px-4 py-3 font-medium">Result</th>
+                                <th className="px-4 py-3 font-medium">MIN</th>
+                                <th className="px-4 py-3 font-medium">PTS</th>
+                                <th className="px-4 py-3 font-medium">REB</th>
+                                <th className="px-4 py-3 font-medium">AST</th>
+                                <th className="px-4 py-3 font-medium">STL</th>
+                                <th className="px-4 py-3 font-medium">BLK</th>
+                                <th className="px-4 py-3 font-medium">TOV</th>
+                                <th className="px-4 py-3 font-medium">PF</th>
+                                <th className="px-4 py-3 font-medium">FG</th>
+                                <th className="px-4 py-3 font-medium">FGA</th>
+                                <th className="px-4 py-3 font-medium">FG%</th>
+                                <th className="px-4 py-3 font-medium">3P</th>
+                                <th className="px-4 py-3 font-medium">3PA</th>
+                                <th className="px-4 py-3 font-medium">3P%</th>
+                                <th className="px-4 py-3 font-medium">FT</th>
+                                <th className="px-4 py-3 font-medium">FTA</th>
+                                <th className="px-4 py-3 font-medium">FT%</th>
+                                <th className="px-4 py-3 font-medium">+/-</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {activeSeasonGameLog.map((game, index) => (
+                                <tr
+                                  key={`${getGameLogKey(game, index)}-page-log`}
+                                  onClick={() => openGameSummary(game, index)}
+                                  onKeyDown={event => {
+                                    if (event.key === "Enter" || event.key === " ") {
+                                      event.preventDefault()
+                                      openGameSummary(game, index)
+                                    }
+                                  }}
+                                  className="cursor-pointer border-t border-white/6 outline-none transition-colors duration-300 hover:bg-white/5 focus:bg-white/5"
+                                  tabIndex={0}
+                                  role="link"
+                                >
+                                  <td className="px-4 py-3 text-slate-300">{game.date}</td>
+                                  <td className="px-4 py-3 font-medium text-white">{game.matchup}</td>
+                                  <td className="px-4 py-3 text-slate-300">{game.result || "-"}</td>
+                                  <td className="px-4 py-3 text-slate-300">{game.min || "-"}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.pts, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.reb, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.ast, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.stl, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.blk, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.tov, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.pf, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.fgm, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.fga, 0)}</td>
+                                  <td className="px-4 py-3">{formatPct(game.fg_pct)}%</td>
+                                  <td className="px-4 py-3">{formatNumber(game.three_pm, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.three_pa, 0)}</td>
+                                  <td className="px-4 py-3">{formatPct(game.fg3_pct)}%</td>
+                                  <td className="px-4 py-3">{formatNumber(game.ftm, 0)}</td>
+                                  <td className="px-4 py-3">{formatNumber(game.fta, 0)}</td>
+                                  <td className="px-4 py-3">{formatPct(game.ft_pct)}%</td>
+                                  <td className="px-4 py-3">{formatSignedNumber(game.plus_minus)}</td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="mt-5 rounded-[1.25rem] border border-dashed border-white/12 bg-slate-900/35 p-6 text-sm text-slate-400">
+                        Season game log data is not available for this player yet.
+                      </div>
+                    )}
                   </div>
                 )}
 

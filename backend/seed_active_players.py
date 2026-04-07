@@ -1,18 +1,18 @@
 import time
-from nba_api.stats.static import players
 from database import db
+from services.player_pool import get_tracked_players
 
 fetch_queue = db["fetch_queue"]
 player_cache = db["player_cache"]
 
 def seed_active_players():
-    active_players = players.get_active_players()
+    tracked_players = get_tracked_players()
 
     total = 0
     queued = 0
     skipped = 0
 
-    for player in active_players:
+    for player in tracked_players:
         total += 1
         player_id = player["id"]
         name = player["full_name"]
@@ -39,7 +39,7 @@ def seed_active_players():
         time.sleep(1)
 
     print("----- DONE -----")
-    print(f"Total active players: {total}")
+    print(f"Total tracked players: {total}")
     print(f"Queued: {queued}")
     print(f"Skipped (cached or already queued): {skipped}")
 

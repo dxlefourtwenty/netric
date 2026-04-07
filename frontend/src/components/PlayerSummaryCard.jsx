@@ -34,6 +34,7 @@ export default function PlayerSummaryCard({
   const [loading, setLoading] = useState(() => !initialSummary)
   const [notCached, setNotCached] = useState(false)
   const [contextMenu, setContextMenu] = useState(null)
+  const displaySeasonStats = summary?.season_stats_by_season?.[summary?.season] || summary?.season_stats
 
   useEffect(() => {
     let intervalId
@@ -155,7 +156,7 @@ export default function PlayerSummaryCard({
   }
 
   function formatStat(stat, decimals = 1) {
-    if (!summary?.season_stats?.gp || summary.season_stats.gp === 0) {
+    if (!displaySeasonStats?.gp || displaySeasonStats.gp === 0) {
       return "0.0"
     }
 
@@ -163,7 +164,7 @@ export default function PlayerSummaryCard({
       return "0.0"
     }
 
-    return (Number(stat) / Number(summary.season_stats.gp)).toFixed(decimals)
+    return (Number(stat) / Number(displaySeasonStats.gp)).toFixed(decimals)
   }
 
   function formatPct(stat, decimals = 1) {
@@ -204,7 +205,7 @@ export default function PlayerSummaryCard({
       <div className="rounded-[1.75rem] border border-white/10 bg-slate-900/55 p-6 shadow-lg shadow-black/20 animate-content-in">
         <div className="mb-4 h-12 w-12 rounded-full border-4 border-blue-400/30 border-t-blue-400 animate-spin" />
         <h2 className="text-xl font-semibold text-white">{player.name}</h2>
-        <p className="mt-2 text-sm text-slate-300">Loading cached summary card…</p>
+        <p className="mt-2 text-sm text-slate-300">Loading player…</p>
       </div>
     )
   }
@@ -213,7 +214,7 @@ export default function PlayerSummaryCard({
     return (
       <div className="rounded-[1.75rem] border border-dashed border-white/15 bg-slate-900/45 p-6 text-slate-300 animate-content-in">
         <h2 className="text-xl font-semibold text-white">{player.name}</h2>
-        <p className="mt-2 text-sm">This player has not been cached by the backend yet.</p>
+        <p className="mt-2 text-sm">This player has not been loaded yet.</p>
       </div>
     )
   }
@@ -345,7 +346,7 @@ export default function PlayerSummaryCard({
               <h2 className="text-xl font-semibold text-white">{player.name}</h2>
               <p className="mt-2 text-sm text-slate-300">Season {summary.season}</p>
               <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-400">
-                {formatNumber(summary.season_stats.gp, 0)} games
+                {formatNumber(displaySeasonStats?.gp, 0)} games
               </p>
             </div>
           </div>
@@ -375,34 +376,34 @@ export default function PlayerSummaryCard({
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">PTS</p>
-                <p className="mt-2 text-base font-semibold text-white">{formatStat(summary.season_stats.pts)}</p>
+                <p className="mt-2 text-base font-semibold text-white">{formatStat(displaySeasonStats?.pts)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">AST</p>
-                <p className="mt-2 text-base font-semibold text-white">{formatStat(summary.season_stats.ast)}</p>
+                <p className="mt-2 text-base font-semibold text-white">{formatStat(displaySeasonStats?.ast)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">REB</p>
-                <p className="mt-2 text-base font-semibold text-white">{formatStat(summary.season_stats.reb)}</p>
+                <p className="mt-2 text-base font-semibold text-white">{formatStat(displaySeasonStats?.reb)}</p>
               </div>
             </div>
 
             <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">STL</p>
-                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(summary.season_stats.stl)}</p>
+                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(displaySeasonStats?.stl)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">BLK</p>
-                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(summary.season_stats.blk)}</p>
+                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(displaySeasonStats?.blk)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">TOV</p>
-                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(summary.season_stats.tov)}</p>
+                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(displaySeasonStats?.tov)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">MIN</p>
-                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(summary.season_stats.min_total)}</p>
+                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(displaySeasonStats?.min_total)}</p>
               </div>
             </div>
           </div>
@@ -413,16 +414,16 @@ export default function PlayerSummaryCard({
               <div className="grid gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">FG%</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(summary.season_stats.fg_pct)}</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(displaySeasonStats?.fg_pct)}</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">3FG%</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(summary.season_stats.fg3_pct)}</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(displaySeasonStats?.fg3_pct)}</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">FT%</p>
                   <p className="mt-2 text-sm font-medium text-slate-200">
-                    {calculatePct(summary.season_stats.ftm, summary.season_stats.fta)}
+                    {calculatePct(displaySeasonStats?.ftm, displaySeasonStats?.fta)}
                   </p>
                 </div>
               </div>
@@ -431,16 +432,16 @@ export default function PlayerSummaryCard({
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">2FG%</p>
                   <p className="mt-2 text-sm font-medium text-slate-200">
-                    {calculatePct(summary.season_stats.fg2pm, summary.season_stats.fg2pa)}
+                    {calculatePct(displaySeasonStats?.fg2pm, displaySeasonStats?.fg2pa)}
                   </p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">TS%</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(summary.season_stats.ts_pct)}</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(displaySeasonStats?.ts_pct)}</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">eFG%</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(summary.season_stats.efg_pct)}</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(displaySeasonStats?.efg_pct)}</p>
                 </div>
               </div>
             </div>

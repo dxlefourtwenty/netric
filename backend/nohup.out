@@ -1923,3 +1923,469 @@ INFO:     127.0.0.1:43812 - "GET /player/1629029/summary HTTP/1.1" 200 OK
 INFO:     127.0.0.1:43818 - "GET /player/1629029/summary HTTP/1.1" 200 OK
 INFO:     127.0.0.1:38450 - "GET /player/1629029/summary HTTP/1.1" 200 OK
 INFO:     127.0.0.1:38464 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47296 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47296 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47352 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47342 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47358 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47374 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47352 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47342 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47352 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47374 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47358 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47342 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47352 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47374 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47342 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47358 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47374 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47352 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47342 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47358 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47374 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47352 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47342 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47358 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47352 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47374 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47342 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47352 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47342 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47374 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47374 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47374 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47326 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45260 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45284 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45250 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45272 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45292 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45260 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45302 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45284 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45250 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45302 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45272 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45292 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45284 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45260 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45260 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45284 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59934 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59942 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39576 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41090 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41102 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41090 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41122 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41102 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41118 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41138 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41140 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41154 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41150 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41122 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41118 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41150 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41138 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41140 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41154 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41140 - "GET /search/players/Lamelo%20Ball HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57170 - "GET /player/1630163/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57178 - "GET /player/1630163/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49944 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49944 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49944 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49970 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49972 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49958 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49944 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49970 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49972 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49958 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49944 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49970 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49972 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49958 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49944 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49970 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49972 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49944 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49958 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49970 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49972 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49944 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49958 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49970 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49944 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49972 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49958 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49972 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49958 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49970 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49972 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49958 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49970 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49928 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49958 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49982 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43724 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43714 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43700 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43716 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43724 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43726 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43734 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43700 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43714 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43716 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43726 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43724 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43700 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43734 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52376 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52370 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52402 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52376 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52390 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52428 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52416 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52370 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52402 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52376 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52390 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52428 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52416 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52370 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53098 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53070 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53082 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53092 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53108 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53102 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53082 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53098 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53070 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53092 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53108 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53102 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35134 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35150 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35758 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35760 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35760 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35758 - "GET /player/201939/summary HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'nba.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [169170]
+INFO:     Started server process [322189]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'nba.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [322189]
+INFO:     Started server process [322246]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'seed_active_players.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [322246]
+INFO:     Started server process [322364]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'refresh_db.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [322364]
+INFO:     Started server process [322478]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+MongoDB connected on attempt 1.
+INFO:     127.0.0.1:44804 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44812 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44812 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44812 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56328 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56328 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56328 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56328 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44804 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44822 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44832 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44820 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44804 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56328 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44832 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44822 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44824 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44832 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44822 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44824 - "GET /player/201939/summary HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'services/fetch_service.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [322478]
+INFO:     Started server process [331222]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'refresh_db.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [331222]
+INFO:     Started server process [331352]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+MongoDB connected on attempt 1.
+INFO:     127.0.0.1:49018 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49022 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49022 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49018 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49018 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49018 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49018 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49018 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49022 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52018 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49022 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49018 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52034 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52050 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52046 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49018 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52034 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52050 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46114 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46130 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35642 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35648 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35648 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35642 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45576 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45582 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45582 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45576 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45576 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45592 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45592 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45576 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45576 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45592 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45592 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45576 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50198 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50186 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50214 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50198 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50186 - "OPTIONS /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50208 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50208 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50224 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50234 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50214 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50244 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50216 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50224 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50244 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50234 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50208 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50208 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50234 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50234 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50208 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50208 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50234 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50208 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57148 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50234 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57140 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57162 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50208 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57154 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50234 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57148 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50208 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57140 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57162 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50234 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57154 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49140 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49142 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36064 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36074 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36096 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36088 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36064 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36106 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36116 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36074 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36096 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36088 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36106 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36064 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36116 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36074 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60596 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60586 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60552 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60580 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44442 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44428 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44456 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44462 - "GET /player/1631105/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44442 - "GET /player/1629029/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /player/201939/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44428 - "GET /player/2544/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44456 - "GET /player/1630559/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44442 - "GET /favorites HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44462 - "GET /player/1628983/summary HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60564 - "GET /player/1631105/summary HTTP/1.1" 200 OK

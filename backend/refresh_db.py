@@ -1,12 +1,11 @@
 from datetime import UTC, datetime
 
-from nba_api.stats.static import players
-
 from database import db
 from services.fetch_service import (
     get_latest_cached_game_date,
     get_latest_remote_game_date,
 )
+from services.player_pool import get_tracked_players
 
 player_cache = db["player_cache"]
 fetch_queue = db["fetch_queue"]
@@ -44,13 +43,14 @@ def should_refresh_player(player_id):
 
 
 def refresh_all_players():
-    active_players = players.get_active_players()
+    tracked_players = get_tracked_players()
 
     queued_count = 0
     skipped_count = 0
     failed_count = 0
+    forced_queue_count = 0
 
-    for player in active_players:
+    for player in tracked_players:
         player_id = player["id"]
         name = player["full_name"]
 
@@ -65,14 +65,18 @@ def refresh_all_players():
         except Exception as exc:
             failed_count += 1
             print(f"Refresh check failed for {player_id}: {exc}")
+            fetch_queue.insert_one(build_refresh_job(player_id, name))
+            queued_count += 1
+            forced_queue_count += 1
             continue
 
         fetch_queue.insert_one(build_refresh_job(player_id, name))
         queued_count += 1
 
     print(
-        f"Queued {queued_count} active players for refresh. "
-        f"Skipped {skipped_count}. Failed checks {failed_count}."
+        f"Queued {queued_count} tracked players for refresh. "
+        f"Skipped {skipped_count}. Failed checks {failed_count}. "
+        f"Forced queued after failed checks {forced_queue_count}."
     )
 
 

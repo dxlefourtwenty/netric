@@ -120,12 +120,14 @@ export default function PlayerCard({
   name,
   season,
   season_stats,
+  season_stats_by_season,
   last_game,
   headshot_url,
 }) {
   const navigate = useNavigate()
   const token = typeof window !== "undefined" ? window.localStorage.getItem("token") : null
   const [isFavorited, setIsFavorited] = useState(() => isPlayerFavorited(token, player_id))
+  const displaySeasonStats = season_stats_by_season?.[season] || season_stats
 
   function formatNumber(value, decimals = 1) {
     if (value == null || Number.isNaN(Number(value))) {
@@ -136,7 +138,7 @@ export default function PlayerCard({
   }
 
   function formatStat(stat, decimals = 1) {
-    if (!season_stats?.gp || season_stats.gp === 0) {
+    if (!displaySeasonStats?.gp || displaySeasonStats.gp === 0) {
       return "0.0"
     }
 
@@ -144,7 +146,7 @@ export default function PlayerCard({
       return "0.0"
     }
 
-    return (Number(stat) / Number(season_stats.gp)).toFixed(decimals)
+    return (Number(stat) / Number(displaySeasonStats.gp)).toFixed(decimals)
   }
 
   function formatPct(stat, decimals = 1) {
@@ -192,7 +194,7 @@ export default function PlayerCard({
     }
   }
 
-  if (!season_stats) {
+  if (!displaySeasonStats) {
     return null
   }
 
@@ -234,34 +236,34 @@ export default function PlayerCard({
             <div className="mt-4 grid gap-3 sm:grid-cols-3">
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">PTS</p>
-                <p className="mt-2 text-base font-semibold text-white">{formatStat(season_stats.pts)}</p>
+                <p className="mt-2 text-base font-semibold text-white">{formatStat(displaySeasonStats.pts)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">AST</p>
-                <p className="mt-2 text-base font-semibold text-white">{formatStat(season_stats.ast)}</p>
+                <p className="mt-2 text-base font-semibold text-white">{formatStat(displaySeasonStats.ast)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">REB</p>
-                <p className="mt-2 text-base font-semibold text-white">{formatStat(season_stats.reb)}</p>
+                <p className="mt-2 text-base font-semibold text-white">{formatStat(displaySeasonStats.reb)}</p>
               </div>
             </div>
 
             <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">STL</p>
-                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(season_stats.stl)}</p>
+                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(displaySeasonStats.stl)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">BLK</p>
-                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(season_stats.blk)}</p>
+                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(displaySeasonStats.blk)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">TOV</p>
-                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(season_stats.tov)}</p>
+                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(displaySeasonStats.tov)}</p>
               </div>
               <div className="min-w-0 rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                 <p className="text-xs uppercase tracking-[0.22em] text-slate-400">MIN</p>
-                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(season_stats.min_total)}</p>
+                <p className="mt-2 text-sm font-medium text-slate-200">{formatStat(displaySeasonStats.min_total)}</p>
               </div>
             </div>
           </div>
@@ -272,16 +274,16 @@ export default function PlayerCard({
               <div className="grid gap-3 sm:grid-cols-3">
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">FG%</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(season_stats.fg_pct)}</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(displaySeasonStats.fg_pct)}</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">3FG%</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(season_stats.fg3_pct)}</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(displaySeasonStats.fg3_pct)}</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">FT%</p>
                   <p className="mt-2 text-sm font-medium text-slate-200">
-                    {calculatePct(season_stats.ftm, season_stats.fta)}
+                    {calculatePct(displaySeasonStats.ftm, displaySeasonStats.fta)}
                   </p>
                 </div>
               </div>
@@ -290,16 +292,16 @@ export default function PlayerCard({
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">2FG%</p>
                   <p className="mt-2 text-sm font-medium text-slate-200">
-                    {calculatePct(season_stats.fg2pm, season_stats.fg2pa)}
+                    {calculatePct(displaySeasonStats.fg2pm, displaySeasonStats.fg2pa)}
                   </p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">TS%</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(season_stats.ts_pct)}</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(displaySeasonStats.ts_pct)}</p>
                 </div>
                 <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.18em] text-slate-400">eFG%</p>
-                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(season_stats.efg_pct)}</p>
+                  <p className="mt-2 text-sm font-medium text-slate-200">{formatPct(displaySeasonStats.efg_pct)}</p>
                 </div>
               </div>
             </div>

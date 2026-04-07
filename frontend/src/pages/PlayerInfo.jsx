@@ -1,5 +1,5 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import axios from "axios"
 
 import ReturnHome from "../components/ReturnHome"
@@ -18,6 +18,7 @@ export default function PlayerInfo() {
   const [splitMode, setSplitMode] = useState("default")
   const [data, setData] = useState(cachedSummary)
   const [loading, setLoading] = useState(() => !cachedSummary)
+  const gameLogScrollRef = useRef(null)
 
   useEffect(() => {
     const nextCachedSummary = readPlayerSummaryCache(id)
@@ -70,6 +71,30 @@ export default function PlayerInfo() {
     )
   }, [data, searchParams])
 
+  useEffect(() => {
+    const container = gameLogScrollRef.current
+
+    if (!container) {
+      return undefined
+    }
+
+    function handleWheel(event) {
+      event.preventDefault()
+
+      if (container.scrollWidth <= container.clientWidth) {
+        return
+      }
+
+      container.scrollLeft += event.deltaX + event.deltaY
+    }
+
+    container.addEventListener("wheel", handleWheel, { passive: false })
+
+    return () => {
+      container.removeEventListener("wheel", handleWheel)
+    }
+  }, [tab, splitMode, data, selectedGameLogSeason])
+
   if (!data || !data.season_stats)
     return (
       <div className="relative min-h-screen overflow-hidden bg-slate-950 px-4 py-10 text-white sm:px-6 lg:px-8">
@@ -97,8 +122,8 @@ export default function PlayerInfo() {
     return Number(value).toFixed(decimals)
   }
 
-  function formatStat(stat, decimals = 1) {
-    if (!data?.season_stats?.gp || data.season_stats.gp === 0) {
+  function formatPerGameStat(seasonStats, stat, decimals = 1) {
+    if (!seasonStats?.gp || seasonStats.gp === 0) {
       return "0.0"
     }
 
@@ -106,7 +131,7 @@ export default function PlayerInfo() {
       return "0.0"
     }
 
-    return (Number(stat) / Number(data.season_stats.gp)).toFixed(decimals)
+    return (Number(stat) / Number(seasonStats.gp)).toFixed(decimals)
   }
 
   function formatPct(stat, decimals = 1) {
@@ -131,6 +156,15 @@ export default function PlayerInfo() {
     }
 
     return Number(value) > 0 ? `+${Number(value)}` : `${Number(value)}`
+  }
+
+  function toNumericValue(value) {
+    if (value == null || value === "") {
+      return 0
+    }
+
+    const parsedValue = Number(value)
+    return Number.isNaN(parsedValue) ? 0 : parsedValue
   }
 
   function parseGameDate(game) {
@@ -240,50 +274,70 @@ export default function PlayerInfo() {
     return groupedRows
   }
 
-  const primaryStats = [
-    { label: "PTS", value: formatStat(data.season_stats.pts), accent: "from-blue-500/30 to-cyan-400/10" },
-    { label: "AST", value: formatStat(data.season_stats.ast), accent: "from-emerald-500/30 to-teal-400/10" },
-    { label: "REB", value: formatStat(data.season_stats.reb), accent: "from-amber-500/30 to-orange-400/10" },
-    { label: "TS%", value: formatPct(data.season_stats.ts_pct), accent: "from-fuchsia-500/30 to-pink-400/10" },
-  ]
+  function getGameLogAverages(games) {
+    if (!Array.isArray(games) || games.length === 0) {
+      return null
+    }
 
-  const seasonSections = [
-    {
-      title: "Scoring Output",
-      description: "Per-game production across the core box score categories.",
-      stats: [
-        { label: "PTS", value: formatStat(data.season_stats.pts) },
-        { label: "AST", value: formatStat(data.season_stats.ast) },
-        { label: "REB", value: formatStat(data.season_stats.reb) },
-        { label: "STL", value: formatStat(data.season_stats.stl) },
-        { label: "BLK", value: formatStat(data.season_stats.blk) },
-        { label: "TOV", value: formatStat(data.season_stats.tov) },
-        { label: "MIN", value: formatStat(data.season_stats.min_total) },
-      ],
-    },
-    {
-      title: "Shot Making",
-      description: "Per-game makes with the most relevant accuracy markers.",
-      stats: [
-        { label: "FGM", value: formatStat(data.season_stats.fgm) },
-        { label: "2PM", value: formatStat(data.season_stats.fg2pm) },
-        { label: "3PM", value: formatStat(data.season_stats.three_pm) },
-        { label: "FG%", value: `${formatPct(data.season_stats.fg_pct)}%` },
-        { label: "2FG%", value: `${calculatePct(data.season_stats.fg2pm, data.season_stats.fg2pa)}%` },
-        { label: "3FG%", value: `${formatPct(data.season_stats.fg3_pct)}%` },
-        { label: "FT%", value: `${calculatePct(data.season_stats.ftm, data.season_stats.fta)}%` },
-      ],
-    },
-    {
-      title: "Efficiency Snapshot",
-      description: "A quick look at season-level efficiency and availability.",
-      stats: [
-        { label: "TS%", value: `${formatPct(data.season_stats.ts_pct)}%` },
-        { label: "eFG%", value: `${formatPct(data.season_stats.efg_pct)}%` },
-        { label: "Games", value: formatNumber(data.season_stats.gp, 0) },
-      ],
-    },
-  ]
+    const totals = games.reduce(
+      (accumulator, game) => ({
+        min: accumulator.min + toNumericValue(game.min),
+        pts: accumulator.pts + toNumericValue(game.pts),
+        reb: accumulator.reb + toNumericValue(game.reb),
+        ast: accumulator.ast + toNumericValue(game.ast),
+        stl: accumulator.stl + toNumericValue(game.stl),
+        blk: accumulator.blk + toNumericValue(game.blk),
+        tov: accumulator.tov + toNumericValue(game.tov),
+        pf: accumulator.pf + toNumericValue(game.pf),
+        plusMinus: accumulator.plusMinus + toNumericValue(game.plus_minus),
+        fgm: accumulator.fgm + toNumericValue(game.fgm),
+        fga: accumulator.fga + toNumericValue(game.fga),
+        threePm: accumulator.threePm + toNumericValue(game.three_pm),
+        threePa: accumulator.threePa + toNumericValue(game.three_pa),
+        ftm: accumulator.ftm + toNumericValue(game.ftm),
+        fta: accumulator.fta + toNumericValue(game.fta),
+      }),
+      {
+        min: 0,
+        pts: 0,
+        reb: 0,
+        ast: 0,
+        stl: 0,
+        blk: 0,
+        tov: 0,
+        pf: 0,
+        plusMinus: 0,
+        fgm: 0,
+        fga: 0,
+        threePm: 0,
+        threePa: 0,
+        ftm: 0,
+        fta: 0,
+      }
+    )
+    const gamesPlayed = games.length
+
+    return {
+      min: formatNumber(totals.min / gamesPlayed),
+      pts: formatNumber(totals.pts / gamesPlayed),
+      reb: formatNumber(totals.reb / gamesPlayed),
+      ast: formatNumber(totals.ast / gamesPlayed),
+      stl: formatNumber(totals.stl / gamesPlayed),
+      blk: formatNumber(totals.blk / gamesPlayed),
+      tov: formatNumber(totals.tov / gamesPlayed),
+      pf: formatNumber(totals.pf / gamesPlayed),
+      plusMinus: formatSignedNumber((totals.plusMinus / gamesPlayed).toFixed(1)),
+      fgm: formatNumber(totals.fgm / gamesPlayed),
+      fga: formatNumber(totals.fga / gamesPlayed),
+      fgPct: `${calculatePct(totals.fgm, totals.fga)}%`,
+      threePm: formatNumber(totals.threePm / gamesPlayed),
+      threePa: formatNumber(totals.threePa / gamesPlayed),
+      fg3Pct: `${calculatePct(totals.threePm, totals.threePa)}%`,
+      ftm: formatNumber(totals.ftm / gamesPlayed),
+      fta: formatNumber(totals.fta / gamesPlayed),
+      ftPct: `${calculatePct(totals.ftm, totals.fta)}%`,
+    }
+  }
 
   const tabs = [
     { id: "season", label: "Season" },
@@ -294,18 +348,94 @@ export default function PlayerInfo() {
 
   const availableGameLogSeasons = Array.isArray(data.available_game_log_seasons) ? data.available_game_log_seasons : []
   const seasonGameLogs = data.season_game_logs || {}
+  const seasonStatsBySeason = data.season_stats_by_season || {}
+  const availableStatSeasons = Array.isArray(data.available_stat_seasons) ? data.available_stat_seasons : []
   const activeGameLogSeason = selectedGameLogSeason || availableGameLogSeasons[0] || data.season || ""
+  const activeSeason = availableStatSeasons.includes(activeGameLogSeason) ? activeGameLogSeason : data.season
+  const activeSeasonStats = seasonStatsBySeason[activeSeason] || data.season_stats
   const activeSeasonGameLog = Array.isArray(seasonGameLogs[activeGameLogSeason])
     ? seasonGameLogs[activeGameLogSeason]
     : Array.isArray(data.season_game_log)
       ? data.season_game_log
       : []
   const groupedGameLogRows = getGroupedGameLogRows(activeSeasonGameLog, splitMode)
+  const gameLogAverages = getGameLogAverages(activeSeasonGameLog)
+  const activeLastGame = activeSeasonGameLog[0] || data.last_game || null
+  const activeLastFiveGames = activeSeasonGameLog.slice(0, 5)
+
+  const primaryStats = [
+    { label: "PTS", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.pts), accent: "from-blue-500/30 to-cyan-400/10" },
+    { label: "AST", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.ast), accent: "from-emerald-500/30 to-teal-400/10" },
+    { label: "REB", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.reb), accent: "from-amber-500/30 to-orange-400/10" },
+    { label: "TS%", value: formatPct(activeSeasonStats?.ts_pct), accent: "from-fuchsia-500/30 to-pink-400/10" },
+  ]
+
+  const seasonSections = [
+    {
+      title: "Scoring Output",
+      description: "Per-game production across the core box score categories.",
+      stats: [
+        { label: "PTS", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.pts) },
+        { label: "AST", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.ast) },
+        { label: "REB", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.reb) },
+        { label: "STL", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.stl) },
+        { label: "BLK", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.blk) },
+        { label: "TOV", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.tov) },
+        { label: "MIN", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.min_total) },
+      ],
+    },
+    {
+      title: "Shot Making",
+      description: "Per-game makes with the most relevant accuracy markers.",
+      stats: [
+        { label: "FGM", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.fgm) },
+        { label: "2PM", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.fg2pm) },
+        { label: "3PM", value: formatPerGameStat(activeSeasonStats, activeSeasonStats?.three_pm) },
+        { label: "FG%", value: `${formatPct(activeSeasonStats?.fg_pct)}%` },
+        { label: "2FG%", value: `${calculatePct(activeSeasonStats?.fg2pm, activeSeasonStats?.fg2pa)}%` },
+        { label: "3FG%", value: `${formatPct(activeSeasonStats?.fg3_pct)}%` },
+        { label: "FT%", value: `${calculatePct(activeSeasonStats?.ftm, activeSeasonStats?.fta)}%` },
+      ],
+    },
+    {
+      title: "Efficiency Snapshot",
+      description: "A quick look at season-level efficiency and availability.",
+      stats: [
+        { label: "TS%", value: `${formatPct(activeSeasonStats?.ts_pct)}%` },
+        { label: "eFG%", value: `${formatPct(activeSeasonStats?.efg_pct)}%` },
+        { label: "Games", value: formatNumber(activeSeasonStats?.gp, 0) },
+      ],
+    },
+  ]
 
   function openGameSummary(game, index) {
     const gameKey = getGameLogKey(game, index)
     navigate(`/player/${id}/games/${encodeURIComponent(gameKey)}?season=${encodeURIComponent(activeGameLogSeason)}`)
   }
+
+  function findGameLogIndex(targetGame) {
+    if (!targetGame || activeSeasonGameLog.length === 0) {
+      return -1
+    }
+
+    const directMatchIndex = activeSeasonGameLog.findIndex(game => game === targetGame)
+
+    if (directMatchIndex >= 0) {
+      return directMatchIndex
+    }
+
+    if (targetGame.game_id) {
+      return activeSeasonGameLog.findIndex(game => game?.game_id === targetGame.game_id)
+    }
+
+    return activeSeasonGameLog.findIndex(game =>
+      game?.game_date === targetGame.game_date &&
+      game?.date === targetGame.date &&
+      game?.matchup === targetGame.matchup
+    )
+  }
+
+  const activeLastGameIndex = findGameLogIndex(activeLastGame)
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 px-4 py-10 text-white sm:px-6 lg:px-8">
@@ -340,7 +470,7 @@ export default function PlayerInfo() {
                       {data.name}
                     </h1>
                     <p className="mt-2 text-sm text-slate-300 sm:text-base">
-                      Season {data.season} • {formatNumber(data.season_stats.gp, 0)} games played
+                      Season {activeSeason} • {formatNumber(activeSeasonStats?.gp, 0)} games played
                     </p>
                   </div>
                 </div>
@@ -413,41 +543,50 @@ export default function PlayerInfo() {
                       <div className="rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-blue-500/12 via-slate-900/75 to-emerald-400/10 p-5 shadow-lg shadow-black/20">
                         <p className="text-xs uppercase tracking-[0.3em] text-blue-200">Season Focus</p>
                         <h2 className="mt-3 text-2xl font-semibold text-white">
-                          {formatStat(data.season_stats.pts)} / {formatStat(data.season_stats.ast)} / {formatStat(data.season_stats.reb)}
+                          {formatPerGameStat(activeSeasonStats, activeSeasonStats?.pts)} / {formatPerGameStat(activeSeasonStats, activeSeasonStats?.ast)} / {formatPerGameStat(activeSeasonStats, activeSeasonStats?.reb)}
                         </h2>
                         <p className="mt-2 text-sm text-slate-300">
                           A compact scoring, playmaking, and rebounding snapshot for the current season.
                         </p>
                       </div>
 
-                      {data.last_game ? (
-                        <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:border-white/15">
+                      {activeLastGame ? (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (activeLastGameIndex >= 0) {
+                              openGameSummary(activeLastGame, activeLastGameIndex)
+                            }
+                          }}
+                          disabled={activeLastGameIndex < 0}
+                          className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 text-left shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:border-white/15 disabled:cursor-default disabled:hover:translate-y-0 disabled:hover:border-white/10"
+                        >
                           <p className="text-xs uppercase tracking-[0.3em] text-emerald-200">Last Game</p>
-                          <h2 className="mt-3 text-xl font-semibold text-white">{data.last_game.matchup}</h2>
-                          <p className="mt-1 text-sm text-slate-400">{data.last_game.date}</p>
+                          <h2 className="mt-3 text-xl font-semibold text-white">{activeLastGame.matchup}</h2>
+                          <p className="mt-1 text-sm text-slate-400">{activeLastGame.date}</p>
 
                           <div className="mt-5 grid grid-cols-3 gap-3">
                             <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center">
                               <p className="text-xs uppercase tracking-[0.2em] text-slate-400">PTS</p>
-                              <p className="mt-2 text-xl font-semibold text-white">{formatNumber(data.last_game.pts, 0)}</p>
+                              <p className="mt-2 text-xl font-semibold text-white">{formatNumber(activeLastGame.pts, 0)}</p>
                             </div>
                             <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center">
                               <p className="text-xs uppercase tracking-[0.2em] text-slate-400">AST</p>
-                              <p className="mt-2 text-xl font-semibold text-white">{formatNumber(data.last_game.ast, 0)}</p>
+                              <p className="mt-2 text-xl font-semibold text-white">{formatNumber(activeLastGame.ast, 0)}</p>
                             </div>
                             <div className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center">
                               <p className="text-xs uppercase tracking-[0.2em] text-slate-400">REB</p>
-                              <p className="mt-2 text-xl font-semibold text-white">{formatNumber(data.last_game.reb, 0)}</p>
+                              <p className="mt-2 text-xl font-semibold text-white">{formatNumber(activeLastGame.reb, 0)}</p>
                             </div>
                           </div>
-                        </div>
+                        </button>
                       ) : (
                         <div className="rounded-[1.5rem] border border-dashed border-white/12 bg-slate-900/40 p-5 text-sm text-slate-400">
                           Recent game data is not available for this player yet.
                         </div>
                       )}
 
-                      {Array.isArray(data.last_5_games) && data.last_5_games.length > 0 && (
+                      {activeLastFiveGames.length > 0 && (
                         <div className="rounded-[1.5rem] border border-white/10 bg-slate-900/60 p-5 shadow-lg shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:border-white/15">
                           <div className="flex items-center justify-between gap-4">
                             <div>
@@ -466,10 +605,11 @@ export default function PlayerInfo() {
                           </div>
 
                           <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-1">
-                            {data.last_5_games.map(game => (
+                            {activeLastFiveGames.map((game, index) => (
                               <button
                                 key={`${game.game_id || game.game_date || game.matchup}-preview`}
-                                onClick={() => setTab("games")}
+                                type="button"
+                                onClick={() => openGameSummary(game, index)}
                                 className="rounded-2xl border border-white/10 bg-gradient-to-br from-white/6 to-white/0 px-4 py-4 text-left transition-all duration-300 hover:-translate-y-1 hover:border-blue-300/25 hover:bg-white/10"
                               >
                                 <div className="flex items-start justify-between gap-4">
@@ -560,7 +700,11 @@ export default function PlayerInfo() {
 
                     {activeSeasonGameLog.length > 0 ? (
                       <div className="mt-5 w-[calc(100%-0.5rem)] overflow-hidden rounded-[1.25rem] border border-white/10 bg-slate-950/45 pb-3">
-                        <div className="game-log-scroll overflow-x-auto overflow-y-hidden">
+                        <div
+                          ref={gameLogScrollRef}
+                          className="game-log-scroll overflow-x-auto overflow-y-hidden"
+                          style={{ overscrollBehavior: "contain" }}
+                        >
                           <table className="game-log-table min-w-full w-max text-left text-sm text-slate-200">
                             <thead className="bg-white/5 text-xs uppercase tracking-[0.18em] text-slate-400">
                               <tr>
@@ -647,6 +791,33 @@ export default function PlayerInfo() {
                                 )
                               })}
                             </tbody>
+                            {gameLogAverages && (
+                              <tfoot className="border-t border-white/12 bg-white/[0.04]">
+                                <tr className="text-sm text-white">
+                                  <td className="px-4 py-3 font-semibold uppercase tracking-[0.18em] text-blue-200">Avg</td>
+                                  <td className="px-4 py-3" />
+                                  <td className="px-4 py-3" />
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.min}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.pts}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.reb}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.ast}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.stl}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.blk}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.tov}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.pf}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.fgm}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.fga}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.fgPct}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.threePm}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.threePa}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.fg3Pct}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.ftm}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.fta}</td>
+                                  <td className="px-4 py-3 font-medium">{gameLogAverages.ftPct}</td>
+                                  <td className="pl-4 pr-7 py-3 font-medium">{gameLogAverages.plusMinus}</td>
+                                </tr>
+                              </tfoot>
+                            )}
                           </table>
                         </div>
                       </div>

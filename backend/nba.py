@@ -8,7 +8,7 @@ from database import db
 
 player_cache = db["player_cache"]
 fetch_queue = db["fetch_queue"]
-SUMMARY_VERSION = 3
+SUMMARY_VERSION = 4
 
 
 def to_int(value, default=0):
@@ -42,6 +42,56 @@ def build_efficiency_metrics(fgm, fg3m, fga, fta, pts):
 
 def sort_season_ids(season_ids):
     return sorted(season_ids, reverse=True)
+
+
+def build_season_stats(row):
+    season_fgm = to_float(row["FGM"])
+    season_fg3m = to_float(row["FG3M"])
+    season_fga = to_float(row["FGA"])
+    season_fta = to_float(row["FTA"])
+    season_pts = to_float(row["PTS"])
+    efg_pct, ts_pct = build_efficiency_metrics(
+        season_fgm,
+        season_fg3m,
+        season_fga,
+        season_fta,
+        season_pts,
+    )
+
+    return {
+        "gp": to_int(row["GP"]),
+        "min_total": to_float(row["MIN"]),
+        "pts": season_pts,
+        "ast": to_float(row["AST"]),
+        "reb": to_float(row["REB"]),
+        "stl": to_float(row["STL"]),
+        "blk": to_float(row["BLK"]),
+        "tov": to_float(row["TOV"]),
+        "pf": to_float(row["PF"]),
+        "fgm": season_fgm,
+        "fga": season_fga,
+        "fg_pct": to_float(row["FG_PCT"]),
+        "three_pm": season_fg3m,
+        "three_pa": to_float(row["FG3A"]),
+        "fg3_pct": to_float(row["FG3_PCT"]),
+        "ftm": to_float(row["FTM"]),
+        "fta": season_fta,
+        "ft_pct": to_float(row["FT_PCT"]),
+        "efg_pct": efg_pct,
+        "ts_pct": ts_pct,
+        "fg2pm": season_fgm - season_fg3m,
+        "fg2pa": season_fga - to_float(row["FG3A"]),
+    }
+
+
+def build_season_stats_by_season(career_stats: pd.DataFrame):
+    season_stats_by_season = {}
+
+    for _, row in career_stats.iterrows():
+        season_id = str(row["SEASON_ID"])
+        season_stats_by_season[season_id] = build_season_stats(row)
+
+    return season_stats_by_season
 
 
 def normalize_game_log(game_log: pd.DataFrame):
@@ -141,43 +191,8 @@ def build_player_summary_from_data(player_id: int, data: dict):
     team_abbreviation = str(latest.get("TEAM_ABBREVIATION") or "").strip()
     team_id = to_int(latest.get("TEAM_ID"), default=0)
 
-    season_fgm = to_float(latest["FGM"])
-    season_fg3m = to_float(latest["FG3M"])
-    season_fga = to_float(latest["FGA"])
-    season_fta = to_float(latest["FTA"])
-    season_pts = to_float(latest["PTS"])
-    efg_pct, ts_pct = build_efficiency_metrics(
-        season_fgm,
-        season_fg3m,
-        season_fga,
-        season_fta,
-        season_pts,
-    )
-
-    season_stats = {
-        "gp": to_int(latest["GP"]),
-        "min_total": to_float(latest["MIN"]),
-        "pts": season_pts,
-        "ast": to_float(latest["AST"]),
-        "reb": to_float(latest["REB"]),
-        "stl": to_float(latest["STL"]),
-        "blk": to_float(latest["BLK"]),
-        "tov": to_float(latest["TOV"]),
-        "pf": to_float(latest["PF"]),
-        "fgm": season_fgm,
-        "fga": season_fga,
-        "fg_pct": to_float(latest["FG_PCT"]),
-        "three_pm": season_fg3m,
-        "three_pa": to_float(latest["FG3A"]),
-        "fg3_pct": to_float(latest["FG3_PCT"]),
-        "ftm": to_float(latest["FTM"]),
-        "fta": season_fta,
-        "ft_pct": to_float(latest["FT_PCT"]),
-        "efg_pct": efg_pct,
-        "ts_pct": ts_pct,
-        "fg2pm": season_fgm - season_fg3m,
-        "fg2pa": season_fga - to_float(latest["FG3A"]),
-    }
+    season_stats_by_season = build_season_stats_by_season(career_stats)
+    season_stats = season_stats_by_season.get(latest_season_id, build_season_stats(latest))
 
     last_game = normalized_games[0] if normalized_games else None
 
@@ -192,6 +207,8 @@ def build_player_summary_from_data(player_id: int, data: dict):
         },
         "season": latest_season_id,
         "season_stats": season_stats,
+        "season_stats_by_season": season_stats_by_season,
+        "available_stat_seasons": sort_season_ids(season_stats_by_season.keys()),
         "last_game": last_game,
         "last_5_games": normalized_games[:5],
         "season_game_log": normalized_games,

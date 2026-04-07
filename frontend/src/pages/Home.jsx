@@ -636,6 +636,12 @@ export default function Home() {
 
                           setDraftPlayerNameFilter(event.target.value)
                         }}
+                        onKeyDown={event => {
+                          if (event.key === "Enter") {
+                            event.preventDefault()
+                            applyPlayerFilter()
+                          }
+                        }}
                         placeholder={activeDraftFilterPlaceholder}
                         className="mt-3 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-slate-500 focus:border-blue-300/40"
                         autoFocus

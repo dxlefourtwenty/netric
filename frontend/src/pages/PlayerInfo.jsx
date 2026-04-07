@@ -15,6 +15,7 @@ export default function PlayerInfo() {
   const initialTab = searchParams.get("tab")
   const [tab, setTab] = useState(initialTab === "games" ? "games" : "season")
   const [selectedGameLogSeason, setSelectedGameLogSeason] = useState("")
+  const [splitMode, setSplitMode] = useState("default")
   const [data, setData] = useState(cachedSummary)
   const [loading, setLoading] = useState(() => !cachedSummary)
 
@@ -132,6 +133,113 @@ export default function PlayerInfo() {
     return Number(value) > 0 ? `+${Number(value)}` : `${Number(value)}`
   }
 
+  function parseGameDate(game) {
+    if (!game?.game_date) {
+      return null
+    }
+
+    const parsedDate = new Date(`${game.game_date}T00:00:00`)
+    return Number.isNaN(parsedDate.getTime()) ? null : parsedDate
+  }
+
+  function formatLongDate(date) {
+    return new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).format(date)
+  }
+
+  function getWeekStart(date) {
+    const nextDate = new Date(date)
+    nextDate.setDate(nextDate.getDate() - nextDate.getDay())
+    return nextDate
+  }
+
+  function getWeekEnd(weekStart) {
+    const nextDate = new Date(weekStart)
+    nextDate.setDate(nextDate.getDate() + 6)
+    return nextDate
+  }
+
+  function getGroupedGameLogRows(games, mode) {
+    if (mode === "default") {
+      return games.map((game, index) => ({
+        type: "game",
+        key: `${getGameLogKey(game, index)}-row`,
+        game,
+        index,
+      }))
+    }
+
+    const groupedRows = []
+    const groups = new Map()
+
+    games.forEach((game, index) => {
+      const parsedDate = parseGameDate(game)
+
+      if (!parsedDate) {
+        const fallbackKey = "unknown"
+
+        if (!groups.has(fallbackKey)) {
+          groups.set(fallbackKey, {
+            label: "Date Unavailable",
+            games: [],
+          })
+        }
+
+        groups.get(fallbackKey).games.push({ game, index })
+        return
+      }
+
+      if (mode === "month") {
+        const key = `${parsedDate.getFullYear()}-${String(parsedDate.getMonth() + 1).padStart(2, "0")}`
+        const label = new Intl.DateTimeFormat("en-US", {
+          month: "long",
+          year: "numeric",
+        }).format(parsedDate)
+
+        if (!groups.has(key)) {
+          groups.set(key, { label, games: [] })
+        }
+
+        groups.get(key).games.push({ game, index })
+        return
+      }
+
+      const weekStart = getWeekStart(parsedDate)
+      const weekEnd = getWeekEnd(weekStart)
+      const key = weekStart.toISOString().slice(0, 10)
+      const label = `${formatLongDate(weekStart)} - ${formatLongDate(weekEnd)}`
+
+      if (!groups.has(key)) {
+        groups.set(key, { label, games: [] })
+      }
+
+      groups.get(key).games.push({ game, index })
+    })
+
+    Array.from(groups.entries()).forEach(([groupKey, group]) => {
+      groupedRows.push({
+        type: "group",
+        key: `${groupKey}-group`,
+        label: group.label,
+        count: group.games.length,
+      })
+
+      group.games.forEach(({ game, index }) => {
+        groupedRows.push({
+          type: "game",
+          key: `${getGameLogKey(game, index)}-row`,
+          game,
+          index,
+        })
+      })
+    })
+
+    return groupedRows
+  }
+
   const primaryStats = [
     { label: "PTS", value: formatStat(data.season_stats.pts), accent: "from-blue-500/30 to-cyan-400/10" },
     { label: "AST", value: formatStat(data.season_stats.ast), accent: "from-emerald-500/30 to-teal-400/10" },
@@ -192,6 +300,7 @@ export default function PlayerInfo() {
     : Array.isArray(data.season_game_log)
       ? data.season_game_log
       : []
+  const groupedGameLogRows = getGroupedGameLogRows(activeSeasonGameLog, splitMode)
 
   function openGameSummary(game, index) {
     const gameKey = getGameLogKey(game, index)
@@ -418,24 +527,39 @@ export default function PlayerInfo() {
                         </p>
                       </div>
 
-                      <label className="flex flex-col gap-2 text-sm text-slate-300 sm:items-start">
-                        <span className="text-xs uppercase tracking-[0.22em] text-slate-400 pl-2">Season</span>
-                        <select
-                          value={activeGameLogSeason}
-                          onChange={event => setSelectedGameLogSeason(event.target.value)}
-                          className="w-fit rounded-xl border border-white/10 bg-slate-950/70 pl-2 pr-1 py-2 text-white outline-none transition-colors duration-300 hover:border-white/20 focus:border-blue-300/40"
-                        >
-                          {availableGameLogSeasons.map(season => (
-                            <option key={season} value={season}>
-                              {season}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
+                      <div className="relative flex flex-col gap-3 sm:right-[10px] sm:flex-row sm:items-end sm:gap-4">
+                        <label className="flex flex-col gap-2 text-sm text-slate-300 sm:items-start">
+                          <span className="pl-2 text-xs uppercase tracking-[0.22em] text-slate-400">Season</span>
+                          <select
+                            value={activeGameLogSeason}
+                            onChange={event => setSelectedGameLogSeason(event.target.value)}
+                            className="w-fit rounded-xl border border-white/10 bg-slate-950/70 pl-2 pr-1 py-2 text-white outline-none transition-colors duration-300 hover:border-white/20 focus:border-blue-300/40"
+                          >
+                            {availableGameLogSeasons.map(season => (
+                              <option key={season} value={season}>
+                                {season}
+                              </option>
+                            ))}
+                          </select>
+                        </label>
+
+                        <label className="flex flex-col gap-2 text-sm text-slate-300 sm:items-start">
+                          <span className="pl-2 text-xs uppercase tracking-[0.22em] text-slate-400">View</span>
+                          <select
+                            value={splitMode}
+                            onChange={event => setSplitMode(event.target.value)}
+                            className="w-fit rounded-xl border border-white/10 bg-slate-950/70 pl-2 pr-1 py-2 text-white outline-none transition-colors duration-300 hover:border-white/20 focus:border-blue-300/40"
+                          >
+                            <option value="default">Default</option>
+                            <option value="week">Week</option>
+                            <option value="month">Month</option>
+                          </select>
+                        </label>
+                      </div>
                     </div>
 
                     {activeSeasonGameLog.length > 0 ? (
-                      <div className="mt-5 overflow-hidden rounded-[1.25rem] border border-white/10 bg-slate-950/45 pb-3">
+                      <div className="mt-5 w-[calc(100%-0.5rem)] overflow-hidden rounded-[1.25rem] border border-white/10 bg-slate-950/45 pb-3">
                         <div className="game-log-scroll overflow-x-auto overflow-y-hidden">
                           <table className="game-log-table min-w-full w-max text-left text-sm text-slate-200">
                             <thead className="bg-white/5 text-xs uppercase tracking-[0.18em] text-slate-400">
@@ -464,43 +588,64 @@ export default function PlayerInfo() {
                               </tr>
                             </thead>
                             <tbody>
-                              {activeSeasonGameLog.map((game, index) => (
-                                <tr
-                                  key={`${getGameLogKey(game, index)}-page-log`}
-                                  onClick={() => openGameSummary(game, index)}
-                                  onKeyDown={event => {
-                                    if (event.key === "Enter" || event.key === " ") {
-                                      event.preventDefault()
-                                      openGameSummary(game, index)
-                                    }
-                                  }}
-                                  className="cursor-pointer border-t border-white/6 outline-none transition-colors duration-300 hover:bg-white/5 focus:bg-white/5"
-                                  tabIndex={0}
-                                  role="link"
-                                >
-                                  <td className="px-4 py-3 text-slate-300">{game.date}</td>
-                                  <td className="px-4 py-3 font-medium text-white">{game.matchup}</td>
-                                  <td className="px-4 py-3 text-slate-300">{game.result || "-"}</td>
-                                  <td className="px-4 py-3 text-slate-300">{game.min || "-"}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.pts, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.reb, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.ast, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.stl, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.blk, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.tov, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.pf, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.fgm, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.fga, 0)}</td>
-                                  <td className="px-4 py-3">{formatPct(game.fg_pct)}%</td>
-                                  <td className="px-4 py-3">{formatNumber(game.three_pm, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.three_pa, 0)}</td>
-                                  <td className="px-4 py-3">{formatPct(game.fg3_pct)}%</td>
-                                  <td className="px-4 py-3">{formatNumber(game.ftm, 0)}</td>
-                                  <td className="px-4 py-3">{formatNumber(game.fta, 0)}</td>
-                                  <td className="px-4 py-3">{formatPct(game.ft_pct)}%</td>
-                                  <td className="pl-4 pr-7 py-3">{formatSignedNumber(game.plus_minus)}</td>
-                                </tr>
-                              ))}
+                              {groupedGameLogRows.map(row => {
+                                if (row.type === "group") {
+                                  return (
+                                    <tr key={row.key} className="border-t border-white/10 bg-white/[0.03]">
+                                      <td colSpan={21} className="px-4 py-3">
+                                        <div className="flex items-center justify-between gap-4">
+                                          <span className="text-xs font-medium uppercase tracking-[0.22em] text-blue-200">
+                                            {row.label}
+                                          </span>
+                                          <span className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                                            {row.count} {row.count === 1 ? "game" : "games"}
+                                          </span>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  )
+                                }
+
+                                const { game, index } = row
+
+                                return (
+                                  <tr
+                                    key={`${row.key}-page-log`}
+                                    onClick={() => openGameSummary(game, index)}
+                                    onKeyDown={event => {
+                                      if (event.key === "Enter" || event.key === " ") {
+                                        event.preventDefault()
+                                        openGameSummary(game, index)
+                                      }
+                                    }}
+                                    className="cursor-pointer border-t border-white/6 outline-none transition-colors duration-300 hover:bg-white/5 focus:bg-white/5"
+                                    tabIndex={0}
+                                    role="link"
+                                  >
+                                    <td className="px-4 py-3 text-slate-300">{game.date}</td>
+                                    <td className="px-4 py-3 font-medium text-white">{game.matchup}</td>
+                                    <td className="px-4 py-3 text-slate-300">{game.result || "-"}</td>
+                                    <td className="px-4 py-3 text-slate-300">{game.min || "-"}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.pts, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.reb, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.ast, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.stl, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.blk, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.tov, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.pf, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.fgm, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.fga, 0)}</td>
+                                    <td className="px-4 py-3">{formatPct(game.fg_pct)}%</td>
+                                    <td className="px-4 py-3">{formatNumber(game.three_pm, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.three_pa, 0)}</td>
+                                    <td className="px-4 py-3">{formatPct(game.fg3_pct)}%</td>
+                                    <td className="px-4 py-3">{formatNumber(game.ftm, 0)}</td>
+                                    <td className="px-4 py-3">{formatNumber(game.fta, 0)}</td>
+                                    <td className="px-4 py-3">{formatPct(game.ft_pct)}%</td>
+                                    <td className="pl-4 pr-7 py-3">{formatSignedNumber(game.plus_minus)}</td>
+                                  </tr>
+                                )
+                              })}
                             </tbody>
                           </table>
                         </div>

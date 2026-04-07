@@ -14,6 +14,7 @@ const CONTEXT_MENU_PADDING = 16
 export default function PlayerSummaryCard({
   player,
   onRemoved,
+  onSummaryLoaded,
   onMoveToTop,
   onDragStart,
   onDragOver,
@@ -50,6 +51,9 @@ export default function PlayerSummaryCard({
         setLoading(false)
         setNotCached(false)
         writePlayerSummaryCache(player.id, res.data)
+        if (onSummaryLoaded) {
+          onSummaryLoaded(player.id, res.data)
+        }
 
         if (intervalId) {
           clearInterval(intervalId)
@@ -86,6 +90,12 @@ export default function PlayerSummaryCard({
       }
     }
   }, [player.id])
+
+  useEffect(() => {
+    if (summary && onSummaryLoaded) {
+      onSummaryLoaded(player.id, summary)
+    }
+  }, [onSummaryLoaded, player.id, summary])
 
   useEffect(() => {
     if (!contextMenu) {

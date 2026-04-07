@@ -1,5 +1,5 @@
 const PLAYER_SUMMARY_CACHE_TTL = 1000 * 60 * 30
-const PLAYER_SUMMARY_CACHE_VERSION = 2
+const PLAYER_SUMMARY_CACHE_VERSION = 3
 
 export function getPlayerSummaryCacheKey(playerId) {
   return `netric:player-summary:${playerId}`

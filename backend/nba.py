@@ -8,7 +8,7 @@ from database import db
 
 player_cache = db["player_cache"]
 fetch_queue = db["fetch_queue"]
-SUMMARY_VERSION = 2
+SUMMARY_VERSION = 3
 
 
 def to_int(value, default=0):
@@ -137,6 +137,9 @@ def build_player_summary_from_data(player_id: int, data: dict):
     latest_season_id = str(latest["SEASON_ID"])
     season_game_logs = build_season_game_logs(career_stats, data)
     normalized_games = season_game_logs.get(latest_season_id, [])
+    team_name = str(latest.get("TEAM_NAME") or "").strip()
+    team_abbreviation = str(latest.get("TEAM_ABBREVIATION") or "").strip()
+    team_id = to_int(latest.get("TEAM_ID"), default=0)
 
     season_fgm = to_float(latest["FGM"])
     season_fg3m = to_float(latest["FG3M"])
@@ -182,6 +185,11 @@ def build_player_summary_from_data(player_id: int, data: dict):
         "player_id": int(player_id),
         "summary_version": SUMMARY_VERSION,
         "name": data["name"],
+        "team": {
+            "id": team_id,
+            "name": team_name,
+            "abbreviation": team_abbreviation,
+        },
         "season": latest_season_id,
         "season_stats": season_stats,
         "last_game": last_game,

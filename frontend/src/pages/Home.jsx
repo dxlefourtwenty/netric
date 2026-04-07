@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import PlayerSummaryCard from "../components/PlayerSummaryCard"
 import { API_BASE } from "../api"
+import { readPlayerSummaryCache, writePlayerSummaryCache } from "../utils/playerSummaryCache"
 
 const EMPTY_FAVORITES = {
   players: [],
@@ -168,6 +169,23 @@ export default function Home() {
   const [error, setError] = useState(null)
   const [draggedPlayerId, setDraggedPlayerId] = useState(null)
   const [dragOverPlayerId, setDragOverPlayerId] = useState(null)
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState(false)
+  const [selectedFilter, setSelectedFilter] = useState("player_name")
+  const [playerNameFilter, setPlayerNameFilter] = useState("")
+  const [teamFilter, setTeamFilter] = useState("")
+  const [draftPlayerNameFilter, setDraftPlayerNameFilter] = useState("")
+  const [draftTeamFilter, setDraftTeamFilter] = useState("")
+  const [playerSummaries, setPlayerSummaries] = useState(() =>
+    cachedFavorites.players.reduce((summaries, player) => {
+      const summary = readPlayerSummaryCache(player.id)
+
+      if (summary) {
+        summaries[player.id] = summary
+      }
+
+      return summaries
+    }, {})
+  )
   const [playerGridColumns, setPlayerGridColumns] = useState(() => {
     if (typeof window === "undefined") {
       return 1
@@ -248,6 +266,79 @@ export default function Home() {
       window.removeEventListener("resize", updatePlayerGridColumns)
     }
   }, [])
+
+  useEffect(() => {
+    if (typeof document === "undefined") {
+      return undefined
+    }
+
+    const previousOverflow = document.body.style.overflow
+
+    if (isFilterModalOpen) {
+      document.body.style.overflow = "hidden"
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isFilterModalOpen])
+
+  useEffect(() => {
+    setPlayerSummaries(currentSummaries => {
+      const nextSummaries = {}
+
+      for (const player of favorites.players) {
+        const cachedSummary = currentSummaries[player.id] || readPlayerSummaryCache(player.id)
+
+        if (cachedSummary) {
+          nextSummaries[player.id] = cachedSummary
+        }
+      }
+
+      return nextSummaries
+    })
+  }, [favorites.players])
+
+  useEffect(() => {
+    let ignore = false
+
+    async function hydrateMissingPlayerSummaries() {
+      const missingPlayers = favorites.players.filter(player => !playerSummaries[player.id])
+
+      if (!missingPlayers.length) {
+        return
+      }
+
+      await Promise.all(
+        missingPlayers.map(async player => {
+          try {
+            const res = await axios.get(`${API_BASE}/player/${player.id}/summary`)
+
+            if (ignore) {
+              return
+            }
+
+            writePlayerSummaryCache(player.id, res.data)
+            setPlayerSummaries(currentSummaries => ({
+              ...currentSummaries,
+              [player.id]: res.data,
+            }))
+          } catch (err) {
+            if (!ignore && err?.response?.status !== 404) {
+              console.error(err)
+            }
+          }
+        })
+      )
+    }
+
+    hydrateMissingPlayerSummaries()
+
+    return () => {
+      ignore = true
+    }
+  }, [favorites.players, playerSummaries])
 
   function handlePlayerRemoved(playerId) {
     setFavorites(currentFavorites => {
@@ -340,6 +431,52 @@ export default function Home() {
     { id: "teams", label: "Favorite Teams", count: favorites.teams.length },
     { id: "stats", label: "Favorite Stats", count: favorites.stats.length },
   ]
+  const normalizedPlayerNameFilter = playerNameFilter.trim().toLowerCase()
+  const normalizedTeamFilter = teamFilter.trim().toLowerCase()
+  const filteredPlayers = favorites.players.filter(player => {
+    const summary = playerSummaries[player.id]
+    const teamText = `${summary?.team?.name || ""} ${summary?.team?.abbreviation || ""}`.trim().toLowerCase()
+    const matchesName = !normalizedPlayerNameFilter || player.name.toLowerCase().includes(normalizedPlayerNameFilter)
+    const matchesTeam = !normalizedTeamFilter || teamText.includes(normalizedTeamFilter)
+
+    return matchesName && matchesTeam
+  })
+  const activeDraftFilterValue = selectedFilter === "team" ? draftTeamFilter : draftPlayerNameFilter
+  const activeDraftFilterLabel = selectedFilter === "team" ? "Team" : "Player Name"
+  const activeDraftFilterPlaceholder = selectedFilter === "team" ? "Search by team" : "Search by player name"
+
+  function openFilterModal() {
+    setSelectedFilter("player_name")
+    setDraftPlayerNameFilter(playerNameFilter)
+    setDraftTeamFilter(teamFilter)
+    setIsFilterModalOpen(true)
+  }
+
+  function closeFilterModal() {
+    setDraftPlayerNameFilter(playerNameFilter)
+    setDraftTeamFilter(teamFilter)
+    setIsFilterModalOpen(false)
+  }
+
+  function applyPlayerFilter() {
+    setPlayerNameFilter(draftPlayerNameFilter)
+    setTeamFilter(draftTeamFilter)
+    setIsFilterModalOpen(false)
+  }
+
+  function clearPlayerFilter() {
+    setDraftPlayerNameFilter("")
+    setDraftTeamFilter("")
+    setPlayerNameFilter("")
+    setTeamFilter("")
+  }
+
+  function handleSummaryLoaded(playerId, summary) {
+    setPlayerSummaries(currentSummaries => ({
+      ...currentSummaries,
+      [playerId]: summary,
+    }))
+  }
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 px-4 py-10 text-white sm:px-6 lg:px-8">
@@ -432,6 +569,103 @@ export default function Home() {
                 </div>
               )}
 
+              {isFilterModalOpen && (
+                <div
+                  className="fixed inset-0 z-40 flex items-start justify-center overflow-hidden rounded-[2rem] bg-slate-950/70 px-4 pt-12 backdrop-blur-sm animate-content-in sm:pt-16"
+                  onClick={closeFilterModal}
+                >
+                  <div
+                    className="max-h-[calc(100vh-4rem)] w-full max-w-lg overflow-y-auto rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/35 backdrop-blur-2xl"
+                    onClick={event => event.stopPropagation()}
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Filter Players</p>
+                        <h2 className="mt-2 text-2xl font-semibold text-white">Reduce the dashboard layout</h2>
+                        <p className="mt-2 text-sm text-slate-300">
+                          Narrow the visible player cards without changing your saved favorites.
+                        </p>
+                      </div>
+
+                      <button
+                        onClick={closeFilterModal}
+                        className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-slate-300 transition-all duration-300 hover:bg-white/10 hover:text-white"
+                      >
+                        Close
+                      </button>
+                    </div>
+
+                    <div className="mt-6">
+                      <p className="text-xs uppercase tracking-[0.22em] text-slate-400">Filter Selection</p>
+                      <div className="mt-3 flex flex-wrap gap-3">
+                        <button
+                          onClick={() => setSelectedFilter("player_name")}
+                          className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                            selectedFilter === "player_name"
+                              ? "border border-blue-400/20 bg-blue-400/10 text-blue-100"
+                              : "border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
+                          }`}
+                        >
+                          Player Name
+                        </button>
+                        <button
+                          onClick={() => setSelectedFilter("team")}
+                          className={`rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                            selectedFilter === "team"
+                              ? "border border-blue-400/20 bg-blue-400/10 text-blue-100"
+                              : "border border-white/10 bg-white/5 text-slate-300 hover:bg-white/10 hover:text-white"
+                          }`}
+                        >
+                          Team
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className="mt-6">
+                      <label className="text-xs uppercase tracking-[0.22em] text-slate-400" htmlFor="player-name-filter">
+                        {activeDraftFilterLabel}
+                      </label>
+                      <input
+                        id="player-name-filter"
+                        value={activeDraftFilterValue}
+                        onChange={event => {
+                          if (selectedFilter === "team") {
+                            setDraftTeamFilter(event.target.value)
+                            return
+                          }
+
+                          setDraftPlayerNameFilter(event.target.value)
+                        }}
+                        placeholder={activeDraftFilterPlaceholder}
+                        className="mt-3 w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors duration-300 placeholder:text-slate-500 focus:border-blue-300/40"
+                        autoFocus
+                      />
+                    </div>
+
+                    <div className="mt-6 flex items-center justify-between gap-3">
+                      <p className="text-sm text-slate-400">
+                        Showing {filteredPlayers.length} of {favorites.players.length} players
+                      </p>
+
+                      <div className="flex gap-3">
+                        <button
+                          onClick={clearPlayerFilter}
+                          className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-200 transition-all duration-300 hover:bg-white/10 hover:text-white"
+                        >
+                          Clear
+                        </button>
+                        <button
+                          onClick={applyPlayerFilter}
+                          className="rounded-xl bg-white px-4 py-2 text-sm font-medium text-slate-950 transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-100"
+                        >
+                          Apply
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               <div key={activeTab} className="animate-content-in">
                 {activeTab === "players" && (
                   <>
@@ -451,22 +685,47 @@ export default function Home() {
                         </p>
                       </div>
                     ) : (
-                      <div className="grid gap-5 min-[1700px]:grid-cols-2">
-                        {favorites.players.map(player => (
-                          <PlayerSummaryCard
-                            key={player.id}
-                            player={player}
-                            onRemoved={handlePlayerRemoved}
-                            onMoveToTop={handlePlayerMoveToTop}
-                            onDragStart={handlePlayerDragStart}
-                            onDragOver={handlePlayerDragOver}
-                            onDrop={handlePlayerDrop}
-                            onDragEnd={handlePlayerDragEnd}
-                            isDragged={draggedPlayerId === player.id}
-                            isDragTarget={dragOverPlayerId === player.id}
-                            canMoveToTop={favorites.players.findIndex(item => item.id === player.id) >= playerGridColumns}
-                          />
-                        ))}
+                      <div className="space-y-4">
+                        <div className="flex justify-start">
+                          <button
+                            onClick={openFilterModal}
+                            className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100 transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:text-white"
+                          >
+                            Filter
+                          </button>
+                        </div>
+
+                        {filteredPlayers.length === 0 ? (
+                          <div className="rounded-[1.5rem] border border-dashed border-white/15 bg-slate-900/40 p-10 text-center text-slate-300 animate-content-in">
+                            <h2 className="text-2xl font-semibold text-white">No players match this filter</h2>
+                            <p className="mt-2 text-sm">
+                              Update the player name search in the filter modal to bring cards back into the layout.
+                            </p>
+                          </div>
+                        ) : (
+                          <div className="grid gap-5 min-[1700px]:grid-cols-2">
+                            {filteredPlayers.map(player => (
+                              <div
+                                key={player.id}
+                                className="transform-gpu transition-all duration-300 ease-out animate-content-in"
+                              >
+                                <PlayerSummaryCard
+                                  player={player}
+                                  onRemoved={handlePlayerRemoved}
+                                  onSummaryLoaded={handleSummaryLoaded}
+                                  onMoveToTop={handlePlayerMoveToTop}
+                                  onDragStart={handlePlayerDragStart}
+                                  onDragOver={handlePlayerDragOver}
+                                  onDrop={handlePlayerDrop}
+                                  onDragEnd={handlePlayerDragEnd}
+                                  isDragged={draggedPlayerId === player.id}
+                                  isDragTarget={dragOverPlayerId === player.id}
+                                  canMoveToTop={favorites.players.findIndex(item => item.id === player.id) >= playerGridColumns}
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
                     )}
                   </>

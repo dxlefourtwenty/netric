@@ -124,7 +124,7 @@ export default function GameSummary() {
         },
         {
           title: "Shooting Volume",
-          description: "Every made and attempted shot category returned from the DB.",
+          description: "Every made and attempted shot category.",
           stats: [
             { label: "FGM", value: formatGameLogNumber(game.fgm, 0, "0") },
             { label: "FGA", value: formatGameLogNumber(game.fga, 0, "0") },

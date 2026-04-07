@@ -370,22 +370,14 @@ export default function PlayerInfo() {
                                     <p className="mt-1 text-xs text-slate-300">{game.result || "Pending"} • {game.min || "-"} MIN</p>
                                   </div>
 
-                              <div className="grid grid-cols-2 gap-2 text-right text-sm">
-                                <div>
-                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">STL</p>
-                                      <p className="mt-1 font-semibold text-white">{formatNumber(game.stl, 0)}</p>
+                                  <div className="grid grid-cols-2 gap-2 text-right text-sm">
+                                    <div>
+                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">TS%</p>
+                                      <p className="mt-1 font-semibold text-white">{formatPct(game.ts_pct)}</p>
                                     </div>
                                     <div>
-                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">BLK</p>
-                                      <p className="mt-1 font-semibold text-white">{formatNumber(game.blk, 0)}</p>
-                                    </div>
-                                    <div>
-                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">TOV</p>
-                                      <p className="mt-1 font-semibold text-white">{formatNumber(game.tov, 0)}</p>
-                                    </div>
-                                    <div>
-                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">PF</p>
-                                      <p className="mt-1 font-semibold text-white">{formatNumber(game.pf, 0)}</p>
+                                      <p className="text-[11px] uppercase tracking-[0.18em] text-slate-400">EF%</p>
+                                      <p className="mt-1 font-semibold text-white">{formatPct(game.efg_pct)}</p>
                                     </div>
                                   </div>
                                 </div>
@@ -419,7 +411,7 @@ export default function PlayerInfo() {
                       <div>
                         <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Season Game Logs</p>
                         <h2 className="mt-2 text-2xl font-semibold text-white">
-                          {activeSeasonGameLog.length} games cached
+                          {activeSeasonGameLog.length} Games Played
                         </h2>
                         <p className="mt-2 text-sm text-slate-300">
                           Full season game log with the expanded box score breakdown for each game.
@@ -444,8 +436,8 @@ export default function PlayerInfo() {
 
                     {activeSeasonGameLog.length > 0 ? (
                       <div className="mt-5 overflow-hidden rounded-[1.25rem] border border-white/10 bg-slate-950/45 pb-3">
-                        <div className="game-log-scroll overflow-x-auto overflow-y-hidden [scrollbar-gutter:stable]">
-                          <table className="min-w-full w-max text-left text-sm text-slate-200">
+                        <div className="game-log-scroll overflow-x-auto overflow-y-hidden">
+                          <table className="game-log-table min-w-full w-max text-left text-sm text-slate-200">
                             <thead className="bg-white/5 text-xs uppercase tracking-[0.18em] text-slate-400">
                               <tr>
                                 <th className="px-4 py-3 font-medium">Date</th>
@@ -468,7 +460,7 @@ export default function PlayerInfo() {
                                 <th className="px-4 py-3 font-medium">FT</th>
                                 <th className="px-4 py-3 font-medium">FTA</th>
                                 <th className="px-4 py-3 font-medium">FT%</th>
-                                <th className="px-4 py-3 font-medium">+/-</th>
+                                <th className="pl-4 pr-7 py-3 font-medium">+/-</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -506,7 +498,7 @@ export default function PlayerInfo() {
                                   <td className="px-4 py-3">{formatNumber(game.ftm, 0)}</td>
                                   <td className="px-4 py-3">{formatNumber(game.fta, 0)}</td>
                                   <td className="px-4 py-3">{formatPct(game.ft_pct)}%</td>
-                                  <td className="px-4 py-3">{formatSignedNumber(game.plus_minus)}</td>
+                                  <td className="pl-4 pr-7 py-3">{formatSignedNumber(game.plus_minus)}</td>
                                 </tr>
                               ))}
                             </tbody>

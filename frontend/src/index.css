@@ -54,8 +54,15 @@
   background:
     linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.05)) top / 100% 45px no-repeat,
     rgba(15, 23, 42, 0.45);
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 0;
   scrollbar-width: thin;
   scrollbar-color: rgba(148, 163, 184, 0.55) rgba(15, 23, 42, 0.85);
+}
+
+.game-log-table th,
+.game-log-table td {
+  scroll-snap-align: start;
 }
 
 .game-log-scroll::-webkit-scrollbar {
